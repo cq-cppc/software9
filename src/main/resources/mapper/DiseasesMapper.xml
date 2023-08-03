@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cqupt.software_9.dao.mysql.DiseasesMapper">
+
+    <select id="selectDiseasesPage" resultType="com.cqupt.software_9.entity.Diseases">
+        select * from diseases
+        <where>
+            <if test="keyword !=null and keyword !='' ">
+                or name like CONCAT('%',#{keyword},'%')
+                or code like CONCAT('%',#{keyword},'%')
+            </if>
+        </where>
+    </select>
+    <select id="getInfobycode" resultType="com.cqupt.software_9.entity.Diseases">
+            select * form diseases where code=#{code}
+    </select>
+    <select id="findAll" resultType="com.cqupt.software_9.entity.Diseases">
+        SELECT * FROM diseases
+    </select>
+    <select id="findByCode" parameterType="String" resultType="com.cqupt.software_9.entity.Diseases">
+        SELECT * FROM diseases WHERE code = #{code}
+    </select>
+    <select id="findBypart_name" parameterType="String" resultType="com.cqupt.software_9.entity.Diseases">
+        SELECT * FROM diseases WHERE part_name = #{partName}
+    </select>
+    <select id="findpartNamebycode" parameterType="String" resultType="java.lang.String">
+        SELECT part_name FROM diseases WHERE code = #{code}
+    </select>
+    <select id="findnamebycode" parameterType="String" resultType="java.lang.String">
+        SELECT name FROM diseases WHERE code = #{code}
+    </select>
+    <select id="findsympbycode" parameterType="String" resultType="java.lang.String">
+        SELECT symp FROM diseases WHERE code = #{code}
+    </select>
+    <select id="finddptmentbycode" parameterType="String" resultType="java.lang.String">
+        SELECT dptment FROM diseases WHERE code = #{code}
+    </select>
+    <select id="findpreventbycode" parameterType="String" resultType="java.lang.String">
+        SELECT prevent FROM diseases WHERE code = #{code}
+    </select>
+</mapper>
+

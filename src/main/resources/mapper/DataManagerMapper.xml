@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cqupt.software_9.dao.data.DataManagerMapper">
+
+
+
+    <select id="getDataManagerwithoutresult" resultType="com.cqupt.software_9.entity.DataManager">
+        SELECT * FROM data_manager where tabletype = '数据表'
+    </select>
+
+    <update id="updata" >
+        UPDATE data_manager
+         SET isProjection = 1
+        WHERE tablename = #{tableName}
+    </update>
+<!--    <insert id="insertDataManager" parameterType="com.cqupt.software_9.entity.DataManager">-->
+<!--        INSERT INTO data_manager (tablename, diseasename, datanumber, loadtime, Operators, affiliationdatabase, tabletype, uploadmethod, chinesename, featurenumber, isProjection)-->
+<!--        VALUES (#{tablename}, "心脏病", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)-->
+<!--    </insert>-->
+
+
+
+</mapper>

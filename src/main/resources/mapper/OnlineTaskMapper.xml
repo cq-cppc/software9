@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cqupt.software_9.dao.mysql.OnlineTaskMapper">
+
+    <insert id="addOnlineTask">
+             INSERT INTO onlinetask (taskName, leader,disease,model,remark,feature,parameters,targetcolumn,modelpath,result,parametersValue)
+             VALUES (#{taskName}, #{leader},#{disease}, #{model}, #{remark},#{feature},#{parameters},#{targetcolumn},#{modelpath},#{result},#{parametersValue})
+    </insert>
+
+    <select id="upall" resultType="com.cqupt.software_9.entity.OnlineTask">
+         SELECT * FROM onlinetask
+    </select>
+
+</mapper>
+
