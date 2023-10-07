@@ -15,6 +15,4 @@ public class HeartManager {
     private Integer value;
     private String rangeValue;
     private String unit;
-
-
 }

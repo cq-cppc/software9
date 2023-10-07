@@ -1,20 +1,12 @@
 package com.cqupt.software_9.controller;
 
-import com.cqupt.software_9.common.R;
-import com.cqupt.software_9.entity.Patient;
 import com.cqupt.software_9.entity.PatientHeartAll;
-import com.cqupt.software_9.entity.PatientHeartDisease;
 import com.cqupt.software_9.service.PatientHeartAllService;
-import com.cqupt.software_9.service.PatientHeartDiseaseService;
-import com.cqupt.software_9.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RequestMapping("/PatientHeartAll")
 

@@ -1,15 +1,12 @@
 package com.cqupt.software_9.config;
-
 import com.cqupt.software_9.tool.PythonRun;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
-
 @Configuration
 public class ApplicationConfig {
-
     @Primary
     @Scope(value = "prototype")
     @Bean(name = "pythonRun")
@@ -17,5 +14,4 @@ public class ApplicationConfig {
     public PythonRun getPythonRunBean(){
         return new PythonRun();
     }
-
 }

@@ -6,10 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.io.Serializable;
-import java.time.LocalDateTime;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value ="databasemanager")

@@ -4,9 +4,6 @@ import com.cqupt.software_9.dao.data.PageMapper;
 import com.cqupt.software_9.service.Adapter.PageSeviceAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
-
 import java.util.List;
 import java.util.Map;
 @Service

@@ -2,12 +2,8 @@ package com.cqupt.software_9.controller;
 
 import com.cqupt.software_9.entity.Patient;
 import com.cqupt.software_9.entity.PatientHeartDisease;
-import com.cqupt.software_9.entity.User;
 import com.cqupt.software_9.service.PatientHeartDiseaseService;
 import com.cqupt.software_9.service.PatientService;
-import com.cqupt.software_9.service.Request.Query;
-import com.cqupt.software_9.service.Response.Result;
-import com.cqupt.software_9.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -5,11 +5,8 @@ import com.cqupt.software_9.common.R;
 import com.cqupt.software_9.dao.ckd.CkdManagerMapper;
 import com.cqupt.software_9.dao.data.DataManagerMapper;
 import com.cqupt.software_9.dao.mysql.HeartManagerMapper;
-import com.cqupt.software_9.entity.DataManager;
-import com.cqupt.software_9.service.Adapter.DiseasesServiceAdapter;
 import com.cqupt.software_9.service.DiseasesService;
 import com.cqupt.software_9.service.Request.RuntimeBusCreateRequest;
-import com.cqupt.software_9.service.Request.RuntimeBusCreateRequestHearts;
 import com.cqupt.software_9.service.Request.RuntimeBusCreateRequestSingleHeart;
 import com.cqupt.software_9.service.Response.CustomResponse;
 import com.cqupt.software_9.service.Response.RuntimeBusServiceResponse;
@@ -17,8 +14,6 @@ import com.cqupt.software_9.service.Response.RuntimeBusServiceResponseHearts;
 import com.cqupt.software_9.service.Response.RuntimeBusServiceResponseSingleHeart;
 import com.cqupt.software_9.service.RuntimeBusService;
 import com.cqupt.software_9.service.TableManagerService;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -28,9 +23,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.*;
 
     @Log4j2

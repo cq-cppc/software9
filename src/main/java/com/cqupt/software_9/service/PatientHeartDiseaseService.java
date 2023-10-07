@@ -1,6 +1,5 @@
 package com.cqupt.software_9.service;
 
-import com.cqupt.software_9.entity.Patient;
 import com.cqupt.software_9.entity.PatientHeartDisease;
 
 import java.util.List;

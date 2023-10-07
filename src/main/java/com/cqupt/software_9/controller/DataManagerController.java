@@ -4,22 +4,15 @@ import com.cqupt.software_9.common.R;
 import com.cqupt.software_9.dao.ckd.CkdManagerMapper;
 import com.cqupt.software_9.dao.ckd.CkdTableManagerMapper;
 import com.cqupt.software_9.dao.data.DataManagerMapper;
-import com.cqupt.software_9.dao.data.TableManagerMapper;
 import com.cqupt.software_9.dao.mysql.DatabaseManagerMapper;
 import com.cqupt.software_9.entity.DataManager;
 import com.cqupt.software_9.entity.DatabaseManager;
-import com.cqupt.software_9.entity.PatientHeartAll;
 import com.cqupt.software_9.service.DataManagerService;
-import com.cqupt.software_9.service.PageService;
 import com.cqupt.software_9.service.Request.Query;
 import com.cqupt.software_9.service.TableManagerService;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.omg.PortableServer.LIFESPAN_POLICY_ID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.math.BigInteger;
 import java.util.*;
 
 @RestController

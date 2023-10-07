@@ -1,10 +1,13 @@
 package com.cqupt.software_9.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName(value ="t_table_manager")
 @Data
 public class TableManager implements Serializable {

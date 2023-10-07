@@ -6,7 +6,6 @@ import com.cqupt.software_9.entity.dataTable;
 import com.cqupt.software_9.service.Adapter.DataTableManagerServiceAdapter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
 import java.sql.Connection;
 import java.sql.DriverManager;

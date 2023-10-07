@@ -3,11 +3,8 @@ package com.cqupt.software_9.dao.disease;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cqupt.software_9.entity.dataTable;
 import org.apache.ibatis.annotations.Mapper;
-
 import java.util.List;
 import java.util.Map;
-
-
 @Mapper
 
 public interface dataTableManagerMapper extends BaseMapper<dataTable> {
@@ -23,7 +20,4 @@ public interface dataTableManagerMapper extends BaseMapper<dataTable> {
             void deletetablename(String tablename);
             void deletebyid(Integer id);
             void updata(dataTable a);
-
-
-
 }

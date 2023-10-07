@@ -21,6 +21,7 @@ public class DataManagerServiceImpl extends DataManagerServiceAdapter {
     public List<DataManager> getDatawithoutresult() {
         return dataManagerMapper.getDataManagerwithoutresult();
     }
+
     public PageInfo<DataManager> getDatawithoutresult(int page,int pageSize){
         PageHelper.startPage(page,pageSize);
         List<DataManager> data=dataManagerMapper.getDataManagerwithoutresult();

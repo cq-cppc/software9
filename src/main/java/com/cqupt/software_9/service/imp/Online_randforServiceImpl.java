@@ -37,10 +37,6 @@ public class Online_randforServiceImpl extends Online_randforServiceAdapter {
                 indexes.add(index);
             }
         }
-//        List<String> argsList = new LinkedList<>();
-//        for (Integer index : indexes) {
-//            args.add("--calculatedColumns=" + index);
-//        }
         List<String> indexStrings = new ArrayList<>();
         for (Integer index : indexes) {
             indexStrings.add(String.valueOf(index));

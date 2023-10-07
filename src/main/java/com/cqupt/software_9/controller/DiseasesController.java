@@ -1,14 +1,11 @@
 package com.cqupt.software_9.controller;
 
-import com.cqupt.software_9.dao.mysql.HeartManagerMapper;
 import com.cqupt.software_9.entity.Diseases;
 import com.cqupt.software_9.entity.HeartManager;
-import com.cqupt.software_9.entity.User;
 import com.cqupt.software_9.service.DiseasesService;
 import com.cqupt.software_9.service.HeartManagerService;
 import com.cqupt.software_9.service.Request.Query;
 import com.cqupt.software_9.service.Response.Result;
-import com.cqupt.software_9.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;

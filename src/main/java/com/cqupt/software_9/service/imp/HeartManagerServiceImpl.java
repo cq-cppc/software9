@@ -1,6 +1,5 @@
 package com.cqupt.software_9.service.imp;
 
-import com.cqupt.software_9.dao.mysql.DiseasesMapper;
 import com.cqupt.software_9.dao.mysql.HeartManagerMapper;
 import com.cqupt.software_9.dao.mysql.HeartMapper;
 import com.cqupt.software_9.entity.HeartManager;

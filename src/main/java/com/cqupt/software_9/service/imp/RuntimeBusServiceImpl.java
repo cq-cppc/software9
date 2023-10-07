@@ -1,6 +1,5 @@
 package com.cqupt.software_9.service.imp;
 
-import com.alibaba.fastjson.JSONObject;
 import com.cqupt.software_9.entity.PatientHeartDisease;
 import com.cqupt.software_9.service.Adapter.RuntimeBusServiceAdapter;
 import com.cqupt.software_9.service.PatientHeartDiseaseService;
@@ -88,9 +87,6 @@ public class RuntimeBusServiceImpl extends RuntimeBusServiceAdapter {
 
 
         RuntimeTaskRequest runtimeTaskRequest=new RuntimeTaskRequest();
-        // runtimeTaskRequest.setTaskType(TaskType.runtime.toString());
-        // runtimeTaskRequest.setArgs(args);
-        // runtimeTaskRequest.setBizId(request.getBusId());
         runtimeTaskRequest.setPyPath("F:/Code/Heart-Disease-Prediction-master/heart_code-test1.1.1.PY");
         runtimeTaskRequest.setArgs(args);
         System.out.println("Python脚本路径：" + runtimeTaskRequest.getPyPath());
@@ -125,9 +121,6 @@ public class RuntimeBusServiceImpl extends RuntimeBusServiceAdapter {
         }
 
         RuntimeTaskRequest runtimeTaskRequest=new RuntimeTaskRequest();
-        // runtimeTaskRequest.setTaskType(TaskType.runtime.toString());
-        // runtimeTaskRequest.setArgs(args);
-        // runtimeTaskRequest.setBizId(request.getBusId());
         runtimeTaskRequest.setPyPath("F:/Code/Heart-Disease-Prediction-master/heart_code-test1.1.1.PY");
         runtimeTaskRequest.setArgs(args);
         System.out.println("Python脚本路径：" + runtimeTaskRequest.getPyPath());

@@ -1,11 +1,8 @@
 package com.cqupt.software_9.dao.ckd;
-
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cqupt.software_9.entity.DataManager;
 import org.apache.ibatis.annotations.Mapper;
-
 import java.util.List;
-
 @Mapper
 public interface CkdManagerMapper extends BaseMapper<DataManager> {
 
