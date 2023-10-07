@@ -9,6 +9,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,19 +19,11 @@ import java.util.Map;
 @RestController
 @RequestMapping("/TableManager")
 public class TableManagerController {
-    @Autowired
+    @Resource
     private TableManagerService tableManagerService;
-    @Autowired
-    private PageService pageService;
 
+    @Resource
     private  com.cqupt.software_9.dao.data.TableManagerMapper tableManagerMapper;
-
-    public TableManagerController(TableManagerMapper tableManagerMapper) {
-        this.tableManagerMapper = tableManagerMapper;
-    }
-
-
-
 
     /**
      * 根据表名获取到前面1000行信息

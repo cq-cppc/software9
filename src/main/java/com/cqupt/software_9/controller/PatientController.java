@@ -7,6 +7,7 @@ import com.cqupt.software_9.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,19 +17,12 @@ import java.util.Map;
 
 @RestController
 public class PatientController {
-    private final PatientService patientService;
+    @Resource
+    private  PatientService patientService;
+
+    @Resource
     private PatientHeartDiseaseService patientHeartDiseaseService;
 
-    @Autowired
-    public PatientController(PatientService patientService, PatientHeartDiseaseService patientHeartDiseaseService)
-    {
-        this.patientService = patientService;
-        this.patientHeartDiseaseService=patientHeartDiseaseService;
-    }
-//    @Autowired
-//    public PatientController(PatientService patientService) {
-//        this.patientService = patientService;
-//    }
     /**
      * Author:陈鹏
      *时间：2023.6.23

@@ -7,6 +7,7 @@ import com.cqupt.software_9.service.Response.Result;
 import com.cqupt.software_9.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @RequestMapping("/User")
@@ -14,10 +15,9 @@ import java.util.List;
 @RestController
 public class UserController {
 
+    @Resource
     private UserService userService;
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+
     /**
      * 分页查询
      * @param queryDTO

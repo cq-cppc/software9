@@ -13,31 +13,28 @@ import com.cqupt.software_9.service.TableManagerService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 import java.util.*;
 
 @RestController
 @RequestMapping("/DataManager")
 public class DataManagerController {
-    @Autowired
+    @Resource
     private DataManagerService dataManagerService;
 
-    @Autowired
+    @Resource
     private TableManagerService tableManagerService;
 
-    private DataManagerMapper dataManagerMapper;
-
+    @Resource
     private CkdManagerMapper ckdManagerMapper;
 
+    @Resource
     private DatabaseManagerMapper databaseManagerMapper;
 
+    @Resource
     private CkdTableManagerMapper ckdTableManagerMapper;
 
-    public DataManagerController(DataManagerMapper dataManagerMapper,CkdManagerMapper ckdManagerMapper,DatabaseManagerMapper databaseManagerMapper,CkdTableManagerMapper ckdTableManagerMapper) {
-        this.dataManagerMapper = dataManagerMapper;
-        this.ckdManagerMapper=ckdManagerMapper;
-        this.databaseManagerMapper=databaseManagerMapper;
-        this.ckdTableManagerMapper=ckdTableManagerMapper;
-    }
 
     @GetMapping("/heart")
     public List<DataManager> getheartDataWithoutresult() {
@@ -56,16 +53,26 @@ public class DataManagerController {
     }
 
     @GetMapping("/database")
-    public  List<DatabaseManager> getall(){return databaseManagerMapper.getall();}
+    public  List<DatabaseManager> getall(){
+        return databaseManagerMapper.getall();
+    }
 
     @PostMapping("/data")
     public List<DataManager> getDetail(@RequestBody Query Q) {
         String databasename = Q.getDatabasename();
+        if (databasename == null) {
+            throw new IllegalArgumentException("Databasename cannot be null");
+        }
+        if (databasename.isEmpty()) {
+            throw new IllegalArgumentException("Databasename cannot be empty");
+        }
+
         if (databasename.equals("dataandresult")) {
             return getheartDataWithoutresult();
         } else if (databasename.equals("ckd")) {
             return getckdDataWithoutresult();
         }
+
         throw new IllegalArgumentException("Invalid databasename: " + databasename);
     }
 
@@ -81,25 +88,29 @@ public class DataManagerController {
 
     @GetMapping("/getInfoByTableName")
     public R<List<Map<String,Object>>> getInfoByTableName(@RequestParam("basename") String basename, @RequestParam("tablename") String tablename){
-
-            if (basename.equals("dataandresult"))
-            {tablename = tablename.concat("_result");
-                System.out.println(tablename);
+        if (basename == null || basename.isEmpty()) {
+            throw new IllegalArgumentException("Basename cannot be null or empty");
+        }
+        if (tablename == null || tablename.isEmpty()) {
+            throw new IllegalArgumentException("Tablename cannot be null or empty");
+        }
+        if (basename.equals("dataandresult"))
+        {tablename = tablename.concat("_result");
+            System.out.println(tablename);
 //            tableName = tableName.replace("\"", "");
             List<Map<String, Object>> res = tableManagerService.getInfoByTableName(tablename);
             return new R<>(200, "成功", res);
-            }else if(basename.equals("ckd"))
-            {
-                tablename = tablename.concat("_result");
-                System.out.println(tablename);
-                List<Map<String, Object>> res = ckdTableManagerMapper.getInfoByTableName(tablename);
-                return new R<>(200, "成功", res);
-            }
+        }else if(basename.equals("ckd"))
+        {
+            tablename = tablename.concat("_result");
+            System.out.println(tablename);
+            List<Map<String, Object>> res = ckdTableManagerMapper.getInfoByTableName(tablename);
+            return new R<>(200, "成功", res);
+        }
 
 
         throw new IllegalArgumentException("Invalid tableName: " + tablename);
 
     }
-
 
 }

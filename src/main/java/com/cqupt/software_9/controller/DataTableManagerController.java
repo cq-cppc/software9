@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -21,10 +22,10 @@ import java.util.Map;
 @RequestMapping("/DataTable")
 public class DataTableManagerController {
 
-    @Autowired
+    @Resource
     private DataTableManagerService dataTableManagerService;
 
-    @Autowired
+    @Resource
     private FileService fileService;
 
 
@@ -159,6 +160,7 @@ public class DataTableManagerController {
     public Boolean tablesUpdate(@RequestBody dataTable tables){
         return dataTableManagerService.updateById(tables);
     }
+
     @PostMapping("/insert")
     public  Boolean tableInsert(@RequestBody dataTable tables){
         return dataTableManagerService.save(tables);
@@ -194,10 +196,12 @@ public class DataTableManagerController {
 
 
     @PostMapping("/upload")
-    public UploadResult uploadFile(@RequestPart("file") MultipartFile file, @RequestParam("newName") String newName, @RequestParam("disease") String disease) throws IOException {
-            UploadResult res =  fileService.fileUpload(file, newName,disease);
-            dataTableManagerService.updateDataTable(newName,disease);
-            return res;
+    public UploadResult uploadFile(@RequestPart("file") MultipartFile file,
+                                   @RequestParam("newName") String newName,
+                                   @RequestParam("disease") String disease) throws IOException {
+        UploadResult res =  fileService.fileUpload(file, newName,disease);
+        dataTableManagerService.updateDataTable(newName,disease);
+        return res;
     }
 
 
@@ -237,16 +241,17 @@ public class DataTableManagerController {
 //        return Result.fail("上传错误");
 //    }
 
-        /**
-         * 查询索引
-         *
-         * @param tableName
-         * @param targetcolumn
-         * @return
-         */
-        @GetMapping("/test")
-        public Integer a(@RequestParam("tableName") String tableName, @RequestParam("targetcolumn") String targetcolumn){
-            return dataTableManagerService.findTargetColumnIndex(tableName,targetcolumn);
-        }
+    /**
+     * 查询索引
+     *
+     * @param tableName
+     * @param targetcolumn
+     * @return
+     */
+    @GetMapping("/test")
+    public Integer a(@RequestParam("tableName") String tableName,
+                     @RequestParam("targetcolumn") String targetcolumn){
+        return dataTableManagerService.findTargetColumnIndex(tableName,targetcolumn);
+    }
 
 }

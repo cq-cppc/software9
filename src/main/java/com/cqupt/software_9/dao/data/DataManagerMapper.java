@@ -9,5 +9,4 @@ public interface DataManagerMapper extends BaseMapper<DataManager> {
 
     List<DataManager>  getDataManagerwithoutresult();
     void updata(String tableName);
-    void insertDataManager(DataManager dataManager);
 }

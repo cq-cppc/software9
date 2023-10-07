@@ -2,7 +2,6 @@ package com.cqupt.software_9.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cqupt.software_9.common.R;
-import com.cqupt.software_9.dao.ckd.CkdManagerMapper;
 import com.cqupt.software_9.dao.data.DataManagerMapper;
 import com.cqupt.software_9.dao.mysql.HeartManagerMapper;
 import com.cqupt.software_9.service.DiseasesService;
@@ -19,37 +18,34 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-    @Log4j2
+@Log4j2
 @RestController
 @RequestMapping("/runtime_bus")
 
 class RuntimeBusController {
-    @Autowired
-    private TableManagerService tableManagerService;
-    @Resource
-    private RuntimeBusService runtimeBusService;
-    private DataManagerMapper dataManagerMapper;
+        @Resource
+        private TableManagerService tableManagerService;
 
-    private CkdManagerMapper ckdManagerMapper;
-    @Resource
-    private  HeartManagerMapper heartManagerMapper;
-    @Resource
-    private     DiseasesService diseasesService;
+        @Resource
+        private RuntimeBusService runtimeBusService;
 
-    @Autowired
-    public RuntimeBusController(DiseasesService diseasesService,RuntimeBusService runtimeBusService,TableManagerService tableManagerService,DataManagerMapper dataManagerMapper,CkdManagerMapper ckdManagerMapper) {
-        this.diseasesService = diseasesService;
-        this.runtimeBusService=runtimeBusService;
-        this.tableManagerService=tableManagerService;
-        this.dataManagerMapper=dataManagerMapper;
-        this.ckdManagerMapper=ckdManagerMapper;
-    }
+        @Resource
+        private DataManagerMapper dataManagerMapper;
+
+        @Resource
+        private  HeartManagerMapper heartManagerMapper;
+
+        @Resource
+        private DiseasesService diseasesService;
+
 
 
         /**
@@ -202,7 +198,7 @@ class RuntimeBusController {
             System.out.println(tableName+"ooooo");
             String tableNameWithoutQuotes = tableName.replaceAll("\"", "");
             System.out.println(tableName+"ppppp");
-          dataManagerMapper.updata(tableNameWithoutQuotes);
+            dataManagerMapper.updata(tableNameWithoutQuotes);
             RuntimeBusServiceResponseHearts response = runtimeBusService.submitBus3(tableName);
             List<String> res = response.getRes();
             if (res == null || res.isEmpty()) {
@@ -280,5 +276,4 @@ class RuntimeBusController {
 //        }
 //        return new R<>(200, "成功", json);
 //    }
-
 }
