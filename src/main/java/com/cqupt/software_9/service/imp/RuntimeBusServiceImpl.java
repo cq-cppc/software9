@@ -4,7 +4,6 @@ import com.cqupt.software_9.entity.PatientHeartDisease;
 import com.cqupt.software_9.service.Adapter.RuntimeBusServiceAdapter;
 import com.cqupt.software_9.service.PatientHeartDiseaseService;
 import com.cqupt.software_9.service.Request.RuntimeBusCreateRequest;
-import com.cqupt.software_9.service.Request.RuntimeBusCreateRequestHearts;
 import com.cqupt.software_9.service.Request.RuntimeBusCreateRequestSingleHeart;
 import com.cqupt.software_9.service.Request.RuntimeTaskRequest;
 import com.cqupt.software_9.service.Response.RuntimeBusServiceResponse;
@@ -14,7 +13,6 @@ import com.cqupt.software_9.service.Response.RuntimeTaskResponse;
 import com.cqupt.software_9.service.RuntimeTaskService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -31,8 +29,8 @@ public class RuntimeBusServiceImpl extends RuntimeBusServiceAdapter {
     @Resource
     private PatientHeartDiseaseService patientHeartDiseaseService;
 
-    @Resource(name = "dataTableDataSourceProperties")
-    private DataSourceProperties dataTableDataSourceProperties;
+ /*   @Resource(name = "dataTableDataSourceProperties")
+    private DataSourceProperties dataTableDataSourceProperties;*/
 
 
     @Override

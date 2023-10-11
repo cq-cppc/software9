@@ -101,12 +101,32 @@ public class DataTableManagerServiceAdapter implements DataTableManagerService {
     }
 
     @Override
-    public void deletebyid(Integer id) {
-
+    public Boolean deletebyid(Integer id) {
+        return null;
     }
 
     @Override
     public void updata(dataTable a) {
+
+    }
+
+    @Override
+    public List<dataTable> upallDataByUid(Integer uid) {
+        return null;
+    }
+
+    @Override
+    public String getNameById(int id) {
+        return null;
+    }
+
+    @Override
+    public void deleteTable(String tablename) {
+
+    }
+
+    @Override
+    public void deleteTableResult(String tableresult) {
 
     }
 }

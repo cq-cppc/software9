@@ -27,9 +27,6 @@ public class DataTableManagerController {
     @Autowired
     private FileService fileService;
 
-
-
-
     public DataTableManagerController(DataTableManagerService dataTableManagerService, FileService fileService) {
         this.dataTableManagerService = dataTableManagerService;
         this.fileService=fileService;
@@ -37,19 +34,14 @@ public class DataTableManagerController {
 
     /**
      * 获取表管理表所有信息
-     *
-     *
      * @return
      */
     @GetMapping("/upall")
     public List<dataTable> upall() {
         return dataTableManagerService.upalldata();
-
     }
     /**
      * 获取表管理表表名
-     *
-     *
      * @return
      */
     @GetMapping("/name")
@@ -59,8 +51,6 @@ public class DataTableManagerController {
     }
     /**
      * 根据id获取表管理表的所有信息
-     *
-     *
      * @return
      */
     @GetMapping("/upbyid/{id}")
@@ -80,35 +70,19 @@ public class DataTableManagerController {
 
     /**
      * 根据id删除表管理表和对应的表
-     *
-     *
      * @return
      */
     @PostMapping("/delete/{id}")
-    public ResponseEntity<String> deleteData(@PathVariable int id) {
-        try {
-            // Step 1: Get the data to be deleted from the table management table
-            dataTable dataToDelete = dataTableManagerService.upbyid(id);
-
-            if (dataToDelete == null) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Data not found with id: " + id);
-            }
-
-            // Get the table name from the retrieved data
-            String tablename = dataToDelete.getTable_name();
-
-            // Step 2: Delete the corresponding table
-            // Perform the deletion operation on the table 'tableName' using your preferred method.
-            // For example, you can use JDBC or JPA to execute a delete query on the corresponding table.
-            dataTableManagerService.deletename(tablename);
-            // Step 3: Delete the data from the table management table
-            dataTableManagerService.deletebyid(id);
-            List<dataTable> res=dataTableManagerService.upalldata();
-
-
-            return ResponseEntity.ok("Data with id " + id + " and the corresponding table have been deleted."+res);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting data: " + e.getMessage());
+    public R deleteData(@PathVariable int id) {
+        String tablename = dataTableManagerService.getNameById(id);
+        String tableresult = tablename + "_result";
+        Boolean flag = dataTableManagerService.deletebyid(id);
+        if (flag == true){
+            dataTableManagerService.deleteTable(tablename);
+            dataTableManagerService.deleteTableResult(tableresult);
+            return new R<>(200,"删除成功",null);
+        }else {
+            return new R<>(500,"删除失败",null);
         }
     }
     /**

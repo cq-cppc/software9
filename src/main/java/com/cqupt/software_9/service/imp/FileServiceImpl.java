@@ -25,11 +25,11 @@ public class FileServiceImpl extends FileServiceAdapter {
     @Resource
     private DataTableManagerService dataTableManagerService;
 
-    @Value("${spring.datasource.disease.url}")
+    @Value("${spring.datasource.mysql.url}")
     private String dbUrl;
-    @Value("${spring.datasource.another.username}")
+    @Value("${spring.datasource.mysql.username}")
     private String dbUsername;
-    @Value("${spring.datasource.another.password}")
+    @Value("${spring.datasource.mysql.password}")
     private String dbPassword;
 
 

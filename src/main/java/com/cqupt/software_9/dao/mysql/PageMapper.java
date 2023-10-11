@@ -1,4 +1,4 @@
-package com.cqupt.software_9.dao.data;
+package com.cqupt.software_9.dao.mysql;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

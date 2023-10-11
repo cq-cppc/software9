@@ -7,7 +7,6 @@ import com.cqupt.software_9.service.Response.RuntimeTaskResponse;
 import com.cqupt.software_9.tool.PythonRun;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,8 +20,8 @@ public class RuntimeTaskServiceImpl extends RuntimeServiceTaskAdapter {
     @Resource
     private PythonRun pythonRun;
 
-    @Resource(name = "dataTableDataSourceProperties")
-    private DataSourceProperties dataTableDataSourceProperties;
+   /* @Resource(name = "dataTableDataSourceProperties")
+    private DataSourceProperties dataTableDataSourceProperties;*/
 
     @Override
     public RuntimeTaskResponse submitTask(RuntimeTaskRequest request) throws Exception {

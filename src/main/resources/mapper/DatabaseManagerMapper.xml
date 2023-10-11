@@ -9,7 +9,7 @@
 
 
     <select id="getall" resultType="com.cqupt.software_9.entity.DatabaseManager">
-        SELECT * FROM databasemanager
+        SELECT distinct diseasename,count(*) as num FROM data_manager where tabletype = "数据表" GROUP BY diseasename
     </select>
 
 

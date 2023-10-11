@@ -67,4 +67,19 @@ public class DataManagerServiceAdapter implements DataManagerService {
     public PageInfo<DataManager> getDatawithoutresult(int page, int pageSize) {
         return null;
     }
+
+    @Override
+    public List<DataManager> getDetail(String diseasename) {
+        return null;
+    }
+
+    @Override
+    public String getTableNameByID(Integer id) {
+        return null;
+    }
+
+    @Override
+    public List<Map<String, String>> getInfoByTableName(String tableName) {
+        return null;
+    }
 }

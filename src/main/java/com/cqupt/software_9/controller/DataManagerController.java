@@ -1,19 +1,20 @@
 package com.cqupt.software_9.controller;
 
 import com.cqupt.software_9.common.R;
-import com.cqupt.software_9.dao.ckd.CkdManagerMapper;
-import com.cqupt.software_9.dao.ckd.CkdTableManagerMapper;
-import com.cqupt.software_9.dao.data.DataManagerMapper;
+import com.cqupt.software_9.dao.mysql.CkdManagerMapper;
+import com.cqupt.software_9.dao.mysql.CkdTableManagerMapper;
+import com.cqupt.software_9.dao.mysql.DataManagerMapper;
 import com.cqupt.software_9.dao.mysql.DatabaseManagerMapper;
 import com.cqupt.software_9.entity.DataManager;
 import com.cqupt.software_9.entity.DatabaseManager;
 import com.cqupt.software_9.service.DataManagerService;
-import com.cqupt.software_9.service.Request.Query;
 import com.cqupt.software_9.service.TableManagerService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import java.util.*;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/DataManager")
@@ -56,17 +57,14 @@ public class DataManagerController {
     }
 
     @GetMapping("/database")
-    public  List<DatabaseManager> getall(){return databaseManagerMapper.getall();}
+    public  List<DatabaseManager> getall(){
+        return databaseManagerMapper.getall();
+    }
 
     @PostMapping("/data")
-    public List<DataManager> getDetail(@RequestBody Query Q) {
-        String databasename = Q.getDatabasename();
-        if (databasename.equals("dataandresult")) {
-            return getheartDataWithoutresult();
-        } else if (databasename.equals("ckd")) {
-            return getckdDataWithoutresult();
-        }
-        throw new IllegalArgumentException("Invalid databasename: " + databasename);
+    public List<DataManager> getDetail(@RequestBody Map<String,String> map) {
+        String diseasename=map.get("diseaseName");
+        return dataManagerService.getDetail(diseasename);
     }
 
 //    @GetMapping("/data")
@@ -79,26 +77,13 @@ public class DataManagerController {
 //        throw new IllegalArgumentException("Invalid databasename: " + databasename);
 //    }
 
-    @GetMapping("/getInfoByTableName")
-    public R<List<Map<String,Object>>> getInfoByTableName(@RequestParam("basename") String basename, @RequestParam("tablename") String tablename){
+    @GetMapping("/getInfoByTableID/{id}")
+    public R<List<Map<String,String>>> getInfoByTableName(@PathVariable Integer id){
+        String tableName = dataManagerService.getTableNameByID(id);
+        tableName = tableName + "_result";
+        List<Map<String,String>> result = dataManagerService.getInfoByTableName(tableName);
 
-            if (basename.equals("dataandresult"))
-            {tablename = tablename.concat("_result");
-                System.out.println(tablename);
-//            tableName = tableName.replace("\"", "");
-            List<Map<String, Object>> res = tableManagerService.getInfoByTableName(tablename);
-            return new R<>(200, "成功", res);
-            }else if(basename.equals("ckd"))
-            {
-                tablename = tablename.concat("_result");
-                System.out.println(tablename);
-                List<Map<String, Object>> res = ckdTableManagerMapper.getInfoByTableName(tablename);
-                return new R<>(200, "成功", res);
-            }
-
-
-        throw new IllegalArgumentException("Invalid tableName: " + tablename);
-
+        return new R<>(200,"查找成功",result);
     }
 
 

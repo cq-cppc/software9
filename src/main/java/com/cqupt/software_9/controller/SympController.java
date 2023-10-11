@@ -1,16 +1,13 @@
 package com.cqupt.software_9.controller;
 
-import com.cqupt.software_9.entity.Diseases;
 import com.cqupt.software_9.entity.Symp;
-import com.cqupt.software_9.service.DiseasesService;
-import com.cqupt.software_9.service.Request.Query;
-import com.cqupt.software_9.service.Response.Result;
 import com.cqupt.software_9.service.SympService;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import org.springframework.web.bind.annotation.*;
-import com.alibaba.fastjson.JSONObject;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -15,7 +15,7 @@
     <name>software_9Excavation</name>
     <description>software_9Excavation</description>
     <properties>
-        <java.version>17</java.version>
+        <java.version>1.8</java.version>
         <spring.cloud.version>2.2.9.RELEASE</spring.cloud.version>
     </properties>
     <dependencies>
@@ -55,7 +55,6 @@
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
-            <version>1.4.6</version>
         </dependency>
 
         <dependency>

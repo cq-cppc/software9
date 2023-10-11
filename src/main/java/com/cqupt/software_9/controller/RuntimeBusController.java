@@ -2,8 +2,8 @@ package com.cqupt.software_9.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cqupt.software_9.common.R;
-import com.cqupt.software_9.dao.ckd.CkdManagerMapper;
-import com.cqupt.software_9.dao.data.DataManagerMapper;
+import com.cqupt.software_9.dao.mysql.CkdManagerMapper;
+import com.cqupt.software_9.dao.mysql.DataManagerMapper;
 import com.cqupt.software_9.dao.mysql.HeartManagerMapper;
 import com.cqupt.software_9.service.DiseasesService;
 import com.cqupt.software_9.service.Request.RuntimeBusCreateRequest;

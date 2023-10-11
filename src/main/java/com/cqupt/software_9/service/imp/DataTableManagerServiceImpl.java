@@ -1,7 +1,7 @@
 package com.cqupt.software_9.service.imp;
 
 
-import com.cqupt.software_9.dao.disease.dataTableManagerMapper;
+import com.cqupt.software_9.dao.mysql.dataTableManagerMapper;
 import com.cqupt.software_9.entity.dataTable;
 import com.cqupt.software_9.service.Adapter.DataTableManagerServiceAdapter;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,11 +16,11 @@ import java.util.Map;
 
 @Service
 public class DataTableManagerServiceImpl extends DataTableManagerServiceAdapter {
-    @Value("${spring.datasource.disease.url}")
+    @Value("${spring.datasource.mysql.url}")
     private String dbUrl;
-    @Value("${spring.datasource.disease.username}")
+    @Value("${spring.datasource.mysql.username}")
     private String dbUsername;
-    @Value("${spring.datasource.disease.password}")
+    @Value("${spring.datasource.mysql.password}")
     private String dbPassword;
     @Resource
     private dataTableManagerMapper dataTableManagerMapper;
@@ -64,8 +64,9 @@ public class DataTableManagerServiceImpl extends DataTableManagerServiceAdapter 
     }
 
     @Override
-    public void deletebyid(Integer id) {
+    public Boolean deletebyid(Integer id) {
         dataTableManagerMapper.deletebyid(id);
+        return true;
     }
 
     @Override
@@ -81,12 +82,12 @@ public class DataTableManagerServiceImpl extends DataTableManagerServiceAdapter 
 
         // 创建一个新的数据对象
         dataTable dataTableEntity = new dataTable();
-        dataTableEntity.setTable_name(table_name);
+        dataTableEntity.setTablename(table_name);
         dataTableEntity.setFeaturenumber(featurenumber);
-        dataTableEntity.setSamplesize(samplesize);
+        dataTableEntity.setDatanumber(samplesize);
 //        dataTableEntity.setTableType("Your Table Type"); // 替换为表类型信息
-        dataTableEntity.setDisease(disease); // 替换为疾病信息
-        dataTableEntity.setCreator("陈鹏"); // 替换为创建者信息
+        dataTableEntity.setDiseasename(disease); // 替换为疾病信息
+        dataTableEntity.setOperators("陈鹏"); // 替换为创建者信息
 
         // 插入新样本数据到data_table表中
         dataTableManagerMapper.insertDataTable(dataTableEntity);
@@ -143,5 +144,25 @@ public class DataTableManagerServiceImpl extends DataTableManagerServiceAdapter 
             e.printStackTrace();
             return 0; // 或者抛出异常
         }
+    }
+
+    @Override
+    public List<dataTable> upallDataByUid(Integer uid) {
+        return dataTableManagerMapper.upallDataByUid(uid);
+    }
+
+    @Override
+    public String getNameById(int id) {
+        return dataTableManagerMapper.getNameById(id);
+    }
+
+    @Override
+    public void deleteTable(String tablename) {
+        dataTableManagerMapper.deleteTable(tablename);
+    }
+
+    @Override
+    public void deleteTableResult(String tableresult) {
+        dataTableManagerMapper.deleteTableResult(tableresult);
     }
 }

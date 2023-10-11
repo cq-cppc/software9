@@ -7,8 +7,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -17,16 +17,13 @@ import java.time.LocalDateTime;
 public class dataTable implements Serializable {
     @TableId(type = IdType.AUTO)
     private Integer id;
-    @TableField("table_desc")
-    private String table_desc;
-    @TableField("table_name")
-    private String table_name;
+    @TableField("tablename")
+    private String tablename;
+    @TableField("diseasename")
+    private String diseasename;
+    private Integer datanumber;
+    private String Operators;
     private Integer featurenumber;
-    private Integer samplesize;
-    private LocalDateTime createtime;
-    @TableField("tableType")
-    private String table_type;
-    private String disease;
-    private String creator;
+    private Integer uid;
 }
 

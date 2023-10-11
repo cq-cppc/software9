@@ -1,4 +1,4 @@
-package com.cqupt.software_9.dao.disease;
+package com.cqupt.software_9.dao.mysql;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cqupt.software_9.entity.dataTable;
@@ -20,4 +20,8 @@ public interface dataTableManagerMapper extends BaseMapper<dataTable> {
             void deletetablename(String tablename);
             void deletebyid(Integer id);
             void updata(dataTable a);
+            List<dataTable> upallDataByUid(Integer uid);
+            String getNameById(int id);
+            void deleteTable(String tablename);
+            void deleteTableResult(String tableresult);
 }

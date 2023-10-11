@@ -2,12 +2,9 @@ package com.cqupt.software_9.service.Adapter;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.cqupt.software_9.entity.Diseases;
-import com.cqupt.software_9.entity.User;
 import com.cqupt.software_9.service.DiseasesService;
 import com.cqupt.software_9.service.Request.Query;
-import com.cqupt.software_9.service.UserService;
 import com.cqupt.software_9.service.imp.DiseasesServiceImpl;
-import com.cqupt.software_9.service.imp.UserServiceImpl;
 
 import java.util.List;
 

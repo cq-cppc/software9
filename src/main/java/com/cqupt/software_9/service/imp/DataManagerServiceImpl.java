@@ -1,7 +1,7 @@
 package com.cqupt.software_9.service.imp;
 
 
-import com.cqupt.software_9.dao.data.DataManagerMapper;
+import com.cqupt.software_9.dao.mysql.DataManagerMapper;
 import com.cqupt.software_9.entity.DataManager;
 import com.cqupt.software_9.service.Adapter.DataManagerServiceAdapter;
 import com.github.pagehelper.PageHelper;
@@ -26,5 +26,20 @@ public class DataManagerServiceImpl extends DataManagerServiceAdapter {
         PageHelper.startPage(page,pageSize);
         List<DataManager> data=dataManagerMapper.getDataManagerwithoutresult();
         return new PageInfo<>(data);
+    }
+
+    @Override
+    public List<DataManager> getDetail(String diseasename) {
+        return dataManagerMapper.getDetail(diseasename);
+    }
+
+    @Override
+    public String getTableNameByID(Integer id) {
+        return dataManagerMapper.getTableNameByID(id);
+    }
+
+    @Override
+    public List<Map<String, String>> getInfoByTableName(String tableName) {
+        return dataManagerMapper.getInfoByTableName(tableName);
     }
 }

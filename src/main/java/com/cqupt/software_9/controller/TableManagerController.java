@@ -1,11 +1,9 @@
 package com.cqupt.software_9.controller;
 
 import com.cqupt.software_9.common.R;
-import com.cqupt.software_9.dao.data.TableManagerMapper;
+import com.cqupt.software_9.dao.mysql.TableManagerMapper;
 import com.cqupt.software_9.service.PageService;
 import com.cqupt.software_9.service.TableManagerService;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +21,7 @@ public class TableManagerController {
     @Autowired
     private PageService pageService;
 
-    private  com.cqupt.software_9.dao.data.TableManagerMapper tableManagerMapper;
+    private TableManagerMapper tableManagerMapper;
 
     public TableManagerController(TableManagerMapper tableManagerMapper) {
         this.tableManagerMapper = tableManagerMapper;

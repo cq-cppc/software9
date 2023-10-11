@@ -1,0 +1,21 @@
+package com.cqupt.software_9.dao.mysql;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.cqupt.software_9.entity.DataManager;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
+import java.util.Map;
+
+@Mapper
+public interface DataManagerMapper extends BaseMapper<DataManager> {
+
+    List<DataManager>  getDataManagerwithoutresult();
+    void updata(String tableName);
+    void insertDataManager(DataManager dataManager);
+
+    List<DataManager> getDetail(String diseasename);
+
+    String getTableNameByID(Integer id);
+
+    List<Map<String, String>> getInfoByTableName(String tableName);
+}

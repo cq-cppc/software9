@@ -28,7 +28,7 @@ public class DataSourceConfig {
         return factoryProperties.initializeDataSourceBuilder().build();
     }
 
-    @Bean(name = "dataTableDataSourceProperties")
+/*    @Bean(name = "dataTableDataSourceProperties")
     @ConfigurationProperties("spring.datasource.another")
     public DataSourceProperties dataTableDataSourceProperties(){
         return new DataSourceProperties();
@@ -63,7 +63,7 @@ public class DataSourceConfig {
     public DataSource diseaseDataSource(@Qualifier("diseaseDataSourceProperties") DataSourceProperties factoryProperties){
         factoryProperties.setType(HikariDataSource.class);
         return factoryProperties.initializeDataSourceBuilder().build();
-    }
+    }*/
 
 
 

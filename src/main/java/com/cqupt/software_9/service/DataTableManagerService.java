@@ -16,6 +16,10 @@ public interface DataTableManagerService extends IService<dataTable> {
           void updateDataTable(String table_name,String disease);
           List<String> upname();
           void deletename(String tablename);
-          void deletebyid(Integer id);
+          Boolean deletebyid(Integer id);
           void updata(dataTable a);
+          List<dataTable> upallDataByUid(Integer uid);
+          String getNameById(int id);
+          void deleteTable(String tablename);
+          void deleteTableResult(String tableresult);
 }

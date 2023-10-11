@@ -1,3 +1,4 @@
+/*
 package com.cqupt.software_9.dao.data.config;
 
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -42,3 +43,4 @@ public class MybatisDataTableConfig {
 }
 
 
+*/
