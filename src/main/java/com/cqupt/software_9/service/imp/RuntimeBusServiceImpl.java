@@ -51,7 +51,7 @@ public class RuntimeBusServiceImpl extends RuntimeBusServiceAdapter {
         // runtimeTaskRequest.setTaskType(TaskType.runtime.toString());
         // runtimeTaskRequest.setArgs(args);
         // runtimeTaskRequest.setBizId(request.getBusId());
-        runtimeTaskRequest.setPyPath("F:/Code/Disease-prediction-using-Machine-Learning-master/test4.py");
+        runtimeTaskRequest.setPyPath("E:/software9/src/main/resources/Algorithm/Disease-prediction-using-Machine-Learning-master/test4.py");
         runtimeTaskRequest.setArgs(args);
         System.out.println("Python脚本路径：" + runtimeTaskRequest.getPyPath());
 
@@ -85,7 +85,7 @@ public class RuntimeBusServiceImpl extends RuntimeBusServiceAdapter {
 
 
         RuntimeTaskRequest runtimeTaskRequest=new RuntimeTaskRequest();
-        runtimeTaskRequest.setPyPath("F:/Code/Heart-Disease-Prediction-master/heart_code-test1.1.1.PY");
+        runtimeTaskRequest.setPyPath("E:/software9/src/main/resources/Algorithm/Heart-Disease-Prediction-master/heart_code-test1.1.1.PY");
         runtimeTaskRequest.setArgs(args);
         System.out.println("Python脚本路径：" + runtimeTaskRequest.getPyPath());
 
@@ -119,7 +119,7 @@ public class RuntimeBusServiceImpl extends RuntimeBusServiceAdapter {
         }
 
         RuntimeTaskRequest runtimeTaskRequest=new RuntimeTaskRequest();
-        runtimeTaskRequest.setPyPath("F:/Code/Heart-Disease-Prediction-master/heart_code-test1.1.1.PY");
+        runtimeTaskRequest.setPyPath("E:/software9/src/main/resources/Algorithm/Heart-Disease-Prediction-master/heart_code-test1.1.1.PY");
         runtimeTaskRequest.setArgs(args);
         System.out.println("Python脚本路径：" + runtimeTaskRequest.getPyPath());
 
@@ -140,7 +140,7 @@ public class RuntimeBusServiceImpl extends RuntimeBusServiceAdapter {
         System.out.println(args);
         RuntimeTaskRequest runtimeTaskRequest=new RuntimeTaskRequest();
 
-        runtimeTaskRequest.setPyPath("F:/Code/Heart-Disease-Prediction-master/heart_code-test2.1.PY");
+        runtimeTaskRequest.setPyPath("E:/software9/src/main/resources/Algorithm/Heart-Disease-Prediction-master/heart_code-test2.1.PY");
         runtimeTaskRequest.setArgs(args);
         System.out.println("Python脚本路径：" + runtimeTaskRequest.getPyPath());
 
@@ -159,7 +159,7 @@ public class RuntimeBusServiceImpl extends RuntimeBusServiceAdapter {
         System.out.println(args);
         RuntimeTaskRequest runtimeTaskRequest=new RuntimeTaskRequest();
 
-        runtimeTaskRequest.setPyPath("F:/Code/CKD-Prediction-master/mutli_prediction.py");
+        runtimeTaskRequest.setPyPath("E:/software9/src/main/resources/Algorithm/CKD-Prediction-master/mutli_prediction.py");
         runtimeTaskRequest.setArgs(args);
         System.out.println("Python脚本路径：" + runtimeTaskRequest.getPyPath());
 

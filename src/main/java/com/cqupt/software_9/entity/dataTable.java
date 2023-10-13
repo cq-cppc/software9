@@ -9,11 +9,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName(value ="data_table")
+@TableName(value ="data_manager")
 public class dataTable implements Serializable {
     @TableId(type = IdType.AUTO)
     private Integer id;
@@ -22,8 +23,14 @@ public class dataTable implements Serializable {
     @TableField("diseasename")
     private String diseasename;
     private Integer datanumber;
+    private String tabletype;
+    private String uploadmethod;
+    private String affiliationdatabase;
+    private Timestamp loadtime;
+    private String chinesename;
     private String Operators;
     private Integer featurenumber;
+    private Integer isProjection;
     private Integer uid;
 }
 

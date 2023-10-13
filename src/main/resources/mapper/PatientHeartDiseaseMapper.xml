@@ -7,7 +7,7 @@
 <mapper namespace="com.cqupt.software_9.dao.mysql.PatientHeartDiseaseMapper">
 
     <select id="getHeartDiseaseByPatientId" resultType="com.cqupt.software_9.entity.PatientHeartDisease">
-        SELECT * FROM patient_heart_disease
+        SELECT * FROM patient_heart_all
         WHERE patient_id = #{patient_id}
     </select>
 

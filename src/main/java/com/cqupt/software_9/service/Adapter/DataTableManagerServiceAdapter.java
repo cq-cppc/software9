@@ -86,7 +86,7 @@ public class DataTableManagerServiceAdapter implements DataTableManagerService {
         return null;
     }
     @Override
-    public void updateDataTable(String table_name,String disease) {
+    public void updateDataTable(String table_name,String disease, String user, Integer uid, String chinesename) {
 
     }
 
@@ -128,5 +128,10 @@ public class DataTableManagerServiceAdapter implements DataTableManagerService {
     @Override
     public void deleteTableResult(String tableresult) {
 
+    }
+
+    @Override
+    public String getdiseasebyname(String table_name) {
+        return null;
     }
 }

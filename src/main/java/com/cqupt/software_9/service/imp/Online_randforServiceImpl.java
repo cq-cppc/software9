@@ -61,7 +61,7 @@ public class Online_randforServiceImpl extends Online_randforServiceAdapter {
         // runtimeTaskRequest.setTaskType(TaskType.runtime.toString());
         // runtimeTaskRequest.setArgs(args);
         // runtimeTaskRequest.setBizId(request.getBusId());
-        runtimeTaskRequest.setPyPath("F:/code/Online training/Random Forest-test.py");
+        runtimeTaskRequest.setPyPath("E:/software9/src/main/resources/Algorithm/Online training/Random Forest-test.py");
 
         runtimeTaskRequest.setArgs(args);
 //        System.out.println("Python脚本路径：" + runtimeTaskRequest.getPyPath());

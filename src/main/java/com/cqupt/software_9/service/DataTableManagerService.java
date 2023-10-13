@@ -13,7 +13,7 @@ public interface DataTableManagerService extends IService<dataTable> {
           List<Map<String, Object>> getInfoByTableName(String tableName);
           String insert(dataTable datatable);
           Integer findTargetColumnIndex(String tablename, String targetcolumn);
-          void updateDataTable(String table_name,String disease);
+          void updateDataTable(String table_name,String disease, String user, Integer uid, String chinesename);
           List<String> upname();
           void deletename(String tablename);
           Boolean deletebyid(Integer id);
@@ -22,4 +22,5 @@ public interface DataTableManagerService extends IService<dataTable> {
           String getNameById(int id);
           void deleteTable(String tablename);
           void deleteTableResult(String tableresult);
+          String getdiseasebyname(String table_name);
 }

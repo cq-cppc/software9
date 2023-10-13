@@ -7,11 +7,11 @@
 <mapper namespace="com.cqupt.software_9.dao.mysql.HeartManagerMapper">
 
     <select id="findnamebysymp" parameterType="String" resultType="java.lang.String">
-        SELECT name FROM heartmanager WHERE symp = #{symp}
+        SELECT name FROM heart_error_manager WHERE symp = #{symp}
     </select>
 
     <select id="getall"  resultType="com.cqupt.software_9.entity.HeartManager">
-        select * from heartmanager
+        select * from heart_error_manager
     </select>
 
 </mapper>

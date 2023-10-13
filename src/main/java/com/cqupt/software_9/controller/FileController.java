@@ -33,7 +33,7 @@ public class FileController {
     public UploadResult uploadFile(@RequestPart("file") MultipartFile file, @RequestParam("newName") String newName,@RequestParam("disease") String disease) {
         try {
             UploadResult res =  fileService.fileUpload(file, newName,disease);
-            dataTableManagerService.updateDataTable(newName,disease);
+            dataTableManagerService.updateDataTable(newName,disease,"胡双",100,"66");
             return res;
         } catch (Exception e) {
             UploadResult result =new UploadResult();

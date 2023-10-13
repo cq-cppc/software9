@@ -9,6 +9,8 @@ import java.io.IOException;
 
 
 public interface FileService {
-    public UploadResult fileUpload(MultipartFile file, String newName, String disease) throws IOException;
+    UploadResult fileUpload(MultipartFile file, String newName, String disease) throws IOException;
+
+    UploadResult creatUpTable(MultipartFile file, String newName, String disease, String user, Integer uid, String chinesename);
 }
 

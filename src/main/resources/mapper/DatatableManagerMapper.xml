@@ -13,7 +13,7 @@
         SELECT * FROM data_table where id = #{id}
     </select>
     <select id="upname" resultType="java.lang.String">
-        SELECT table_name FROM data_table
+        SELECT tablename FROM data_manager
     </select>
 
     <select id="getInfoByTableName" resultType="java.util.Map">
@@ -37,12 +37,15 @@
     <select id="getNameById" resultType="java.lang.String">
         select tablename from data_manager where id = #{id}
     </select>
+    <select id="getdiseasebyname" resultType="java.lang.String">
+        SELECT diseasename FROM data_manager WHERE tablename = #{table_name}
+    </select>
     <delete id="deletebyid">
         DELETE from data_manager where id = #{id}
     </delete>
     <insert id="insertDataTable" parameterType="com.cqupt.software_9.entity.dataTable">
-        INSERT INTO data_table (table_name, featurenumber, samplesize, disease, creator)
-        VALUES (#{table_name}, #{featurenumber}, #{samplesize}, #{disease}, #{creator})
+        INSERT INTO data_manager (tablename, diseasename, datanumber, loadtime, Operators, affiliationdatabase, tabletype, uploadmethod, chinesename, featurenumber, isProjection, uid)
+        VALUES (#{tablename}, #{diseasename}, #{datanumber}, #{loadtime}, #{Operators}, #{affiliationdatabase}, #{tabletype}, #{uploadmethod}, #{chinesename}, #{featurenumber}, #{isProjection}, #{uid})
     </insert>
 
     <delete id="deletetablename">

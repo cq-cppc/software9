@@ -24,4 +24,5 @@ public interface dataTableManagerMapper extends BaseMapper<dataTable> {
             String getNameById(int id);
             void deleteTable(String tablename);
             void deleteTableResult(String tableresult);
+            String getdiseasebyname(String table_name);
 }
