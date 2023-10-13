@@ -1,6 +1,6 @@
 package com.cqupt.software_9.service.imp;
 
-import com.cqupt.software_9.dao.mysql.PatientHeartDiseaseMapper;
+import com.cqupt.software_9.mapper.PatientHeartDiseaseMapper;
 import com.cqupt.software_9.entity.PatientHeartDisease;
 import com.cqupt.software_9.service.Adapter.PatientHeartDiseaseServiceAdapter;
 import org.springframework.stereotype.Service;

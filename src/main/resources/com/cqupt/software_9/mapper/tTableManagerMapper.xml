@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cqupt.software_9.mapper.tTableManagerMapper" >
+
+    <resultMap id="tTableField" type="com.cqupt.software_9.entity.tTableField">
+        <result property="field_name" column="field_name" />
+        <result property="is_demography" column="is_demography" />
+        <result property="is_physiological" column="is_physiological" />
+        <result property="is_sociology" column="is_sociology" />
+        <result property="is_label" column="is_label" />
+    </resultMap>
+    <insert id="insertTableManager">
+        INSERT INTO t_table_manager (table_name, field_name, is_demography, is_physiological, is_sociology,is_label,userid)
+        VALUES
+        <foreach collection="tableHeaders" item="header" separator=",">
+            (#{tableName}, #{header.fieldName}, #{header.isDemography}, #{header.isPhysiological}, #{header.isSociology},#{header.isLabel},#{userId})
+        </foreach>
+    </insert>
+    <delete id="deletebyname">
+        delete from t_table_manager where table_name = #{tableName}
+    </delete>
+
+    <select id="getTableNames" resultType="java.lang.String">
+        select distinct table_name from t_table_manager where userid = #{uid}
+    </select>
+
+    <select id="getFiledNamesByTableName" resultMap="tTableField">
+        select field_name,is_demography,is_physiological,is_sociology,is_label from t_table_manager where table_name = #{tableName}
+    </select>
+
+    <update id="updateFieldValues">
+        update t_table_manager set is_demography = #{demography},
+                                   is_physiological = #{physiological},
+                                   is_sociology = #{sociology},
+                                   is_label = #{label}
+        where table_name = #{table_name} and field_name = #{fieldName}
+    </update>
+
+    <insert id="insertTableNameAndFeature">
+        INSERT INTO t_table_manager (table_name, field_name,uesrid)
+        VALUES (#{table_name},#{field_name},#{uid})
+    </insert>
+
+
+    <select id="getFeatureByTableName" resultMap="tTableField">
+        SELECT field_name,is_label FROM t_table_manager WHERE table_name = #{tablename}
+    </select>
+</mapper>

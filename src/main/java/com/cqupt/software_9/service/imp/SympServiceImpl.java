@@ -1,9 +1,8 @@
 package com.cqupt.software_9.service.imp;
 
 
-import com.cqupt.software_9.dao.mysql.SympMapper;
+import com.cqupt.software_9.mapper.SympMapper;
 import com.cqupt.software_9.entity.Symp;
-import com.cqupt.software_9.service.Adapter.DiseasesServiceAdapter;
 import com.cqupt.software_9.service.Adapter.SympServiceAdapter;
 import org.springframework.stereotype.Service;
 

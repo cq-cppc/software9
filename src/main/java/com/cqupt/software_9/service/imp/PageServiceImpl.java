@@ -1,6 +1,6 @@
 package com.cqupt.software_9.service.imp;
 
-import com.cqupt.software_9.dao.mysql.PageMapper;
+import com.cqupt.software_9.mapper.PageMapper;
 import com.cqupt.software_9.service.Adapter.PageSeviceAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

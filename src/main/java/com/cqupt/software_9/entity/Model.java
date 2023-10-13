@@ -17,8 +17,12 @@ import java.time.LocalDateTime;
 public class Model implements Serializable {
     @TableId(type = IdType.AUTO)
     private Integer taskid;
-    private String  modelname;
-    private String  diseasename;
-    private String  publisher;
+    private String modelname;
+    private String diseasename;
+    private String publisher;
+    private String remarks;
     private LocalDateTime createtime;
+    private Integer uid;
+    private String modeurl;
+    private String feature;
 }

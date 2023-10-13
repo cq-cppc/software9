@@ -3,12 +3,16 @@ package com.cqupt.software_9.entity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.util.Date;
 
-@TableName(value ="user")
+
 @Data
+@Accessors(chain = true)
+@TableName(value = "\"user\"", autoResultMap = true)
 public class User {
+
     @TableId
     private Integer uid;
 

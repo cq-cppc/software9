@@ -1,7 +1,7 @@
 package com.cqupt.software_9.service.imp;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.cqupt.software_9.dao.mysql.TableManagerMapper;
+import com.cqupt.software_9.mapper.TableManagerMapper;
 import com.cqupt.software_9.entity.TableManager;
 import com.cqupt.software_9.service.Adapter.TableManagerServiceAdapter;
 import org.springframework.beans.factory.annotation.Autowired;

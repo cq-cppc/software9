@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cqupt.software_9.mapper.ModelMapper">
+
+
+
+    <select id="getallmodel" resultType="com.cqupt.software_9.entity.Model">
+        SELECT * FROM model
+    </select>
+
+    <select id="getModelFeatureByUidAndModelName" resultType="com.cqupt.software_9.entity.Model">
+        SELECT * FROM model WHERE uid = #{uid} and modelname = #{modelname}
+    </select>
+
+    <select id="getUrlByalgorithmNameAndUid" resultType="java.lang.String">
+        SELECT modeurl FROM model WHERE uid = #{uid} and modelname = #{modelname}
+    </select>
+
+    <select id="getAlgorithmByAlgorithmName" resultType="com.cqupt.software_9.entity.publicAl">
+        SELECT * FROM algorithm
+    </select>
+
+</mapper>
+

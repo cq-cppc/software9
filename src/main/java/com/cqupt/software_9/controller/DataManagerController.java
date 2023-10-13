@@ -1,10 +1,10 @@
 package com.cqupt.software_9.controller;
 
 import com.cqupt.software_9.common.R;
-import com.cqupt.software_9.dao.mysql.CkdManagerMapper;
-import com.cqupt.software_9.dao.mysql.CkdTableManagerMapper;
-import com.cqupt.software_9.dao.mysql.DataManagerMapper;
-import com.cqupt.software_9.dao.mysql.DatabaseManagerMapper;
+import com.cqupt.software_9.mapper.CkdManagerMapper;
+import com.cqupt.software_9.mapper.CkdTableManagerMapper;
+import com.cqupt.software_9.mapper.DataManagerMapper;
+import com.cqupt.software_9.mapper.DatabaseManagerMapper;
 import com.cqupt.software_9.entity.DataManager;
 import com.cqupt.software_9.entity.DatabaseManager;
 import com.cqupt.software_9.service.DataManagerService;
@@ -86,5 +86,15 @@ public class DataManagerController {
         return new R<>(200,"查找成功",result);
     }
 
+
+    /*
+    * 获取疾病名称
+    *@return
+    *
+    * */
+    @GetMapping("/getDiseaseName")
+    public List<String> getDiseaseName(){
+        return dataManagerMapper.getDiseaseName();
+    }
 
 }

@@ -1,19 +1,18 @@
 package com.cqupt.software_9.controller;
 
 
-
 import com.cqupt.software_9.common.R;
 import com.cqupt.software_9.common.UploadResult;
 import com.cqupt.software_9.entity.dataTable;
 import com.cqupt.software_9.service.DataTableManagerService;
 import com.cqupt.software_9.service.FileService;
+import com.cqupt.software_9.service.tTableManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +25,9 @@ public class DataTableManagerController {
 
     @Autowired
     private FileService fileService;
+
+    @Autowired
+    private tTableManagerService tTableManagerService;
 
     public DataTableManagerController(DataTableManagerService dataTableManagerService, FileService fileService) {
         this.dataTableManagerService = dataTableManagerService;
@@ -80,6 +82,7 @@ public class DataTableManagerController {
         if (flag == true){
             dataTableManagerService.deleteTable(tablename);
             dataTableManagerService.deleteTableResult(tableresult);
+            tTableManagerService.deletebyname(tablename);
             return new R<>(200,"删除成功",null);
         }else {
             return new R<>(500,"删除失败",null);
@@ -120,8 +123,8 @@ public class DataTableManagerController {
 //        List<Map<String, Object>> res = pageService.getInfoByTableName(tableName);
 //        return new R<>(200, "成功", res);
 //    }
-    @GetMapping("/getInfoByTableName")
-    public R<List<Map<String,Object>>> getInfoByTableName(@RequestParam("tableName") String tableName){
+    @PostMapping("/getInfoByTableName")
+    public R<List<Map<String,Object>>> getInfoByTableName(@RequestBody String tableName){
         tableName = tableName.replace("\"", "");
         List<Map<String, Object>> res = dataTableManagerService.getInfoByTableName(tableName);
         return new R<>(200, "成功", res);
@@ -167,11 +170,42 @@ public class DataTableManagerController {
 //    }
 
 
+    /**
+     * 获取表头
+     * @param file
+     * @param newName
+     * @return
+     */
     @PostMapping("/upload")
-    public UploadResult uploadFile(@RequestPart("file") MultipartFile file, @RequestParam("newName") String newName, @RequestParam("disease") String disease) throws IOException {
-            UploadResult res =  fileService.fileUpload(file, newName,disease);
-            dataTableManagerService.updateDataTable(newName,disease);
+    public UploadResult uploadFile(@RequestPart("file") MultipartFile file, @RequestParam("newName") String newName,@RequestParam("disease") String disease) {
+        try {
+            return fileService.fileUpload(file, newName,disease);
+        } catch (Exception e) {
+            UploadResult res =new UploadResult();
+            res.setCode(500);
+            System.out.println(e);
+            res.setE(e);
             return res;
+        }
+    }
+
+    /**
+     * 上传文件
+     * @param file
+     * @param newName
+     * @return
+     */
+    @PostMapping("/uploadTable")
+    public UploadResult uploadTable(@RequestPart("file") MultipartFile file, @RequestParam("newName") String newName,@RequestParam("disease") String disease,@RequestParam("user") String user,@RequestParam("uid") Integer uid,@RequestParam("chineseName") String chinesename) {
+        try {
+            return fileService.creatUpTable(file, newName,disease,user, uid, chinesename);
+        } catch (Exception e) {
+            UploadResult res =new UploadResult();
+            res.setCode(500);
+            System.out.println(e);
+            res.setE(e);
+            return res;
+        }
     }
 
 
@@ -211,16 +245,31 @@ public class DataTableManagerController {
 //        return Result.fail("上传错误");
 //    }
 
-        /**
-         * 查询索引
-         *
-         * @param tableName
-         * @param targetcolumn
-         * @return
-         */
-        @GetMapping("/test")
-        public Integer a(@RequestParam("tableName") String tableName, @RequestParam("targetcolumn") String targetcolumn){
-            return dataTableManagerService.findTargetColumnIndex(tableName,targetcolumn);
+    /**
+     * 查询索引
+     *
+     * @param tableName
+     * @param targetcolumn
+     * @return
+     */
+    @GetMapping("/test")
+    public Integer a(@RequestParam("tableName") String tableName, @RequestParam("targetcolumn") String targetcolumn){
+        return dataTableManagerService.findTargetColumnIndex(tableName,targetcolumn);
+    }
+
+    /**
+     * 检查表名是否重复
+     * @param newName
+     * @return
+     */
+    @GetMapping("/inspection")
+    public boolean test_name(@RequestParam("newname") String newName){
+        List<String> usedTableNames = dataTableManagerService.upname();
+        if (usedTableNames.contains(newName)) {
+            return  false;
+        }else{
+            return true;
         }
+    }
 
 }

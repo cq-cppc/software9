@@ -6,14 +6,15 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("onlinetask")
+@TableName(value = "onlinetask")
 public class OnlineTask implements Serializable {
-    @TableId(value = "taskId", type = IdType.AUTO)
+    @TableId(value = "\"taskId\"", type = IdType.AUTO)
     private Integer taskId;
     private String  taskName;
     private String  leader;
@@ -27,4 +28,5 @@ public class OnlineTask implements Serializable {
     private String   targetcolumn;
     private String   modelpath;
     private String   result;
+    private Integer  uid;
 }

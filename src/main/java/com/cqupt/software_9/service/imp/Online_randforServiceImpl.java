@@ -24,6 +24,7 @@ public class Online_randforServiceImpl extends Online_randforServiceAdapter {
     public OnlineServiceResponse online_Randfor(RuntimeBusCreateRequest_online_RandFor request) throws Exception {
         OnlineServiceResponse response=new OnlineServiceResponse();
         BeanUtils.copyProperties(request,response);
+        System.out.println(request);
         List<String> args=new LinkedList<>();
 
         int targetcolumn = dataTableManagerService.findTargetColumnIndex(request.getTablename(),request.getTargetcolumn());
@@ -61,7 +62,9 @@ public class Online_randforServiceImpl extends Online_randforServiceAdapter {
         // runtimeTaskRequest.setTaskType(TaskType.runtime.toString());
         // runtimeTaskRequest.setArgs(args);
         // runtimeTaskRequest.setBizId(request.getBusId());
-        runtimeTaskRequest.setPyPath("F:/code/Online training/Random Forest-test.py");
+//        runtimeTaskRequest.setPyPath("E:/software9/src/main/resources/Algorithm/Online training/Random Forest-test.py");
+        runtimeTaskRequest.setPyPath("/home/data/WorkSpace/software9/Arithmetic/Online/Random_Forest-test.py");
+
 
         runtimeTaskRequest.setArgs(args);
 //        System.out.println("Python脚本路径：" + runtimeTaskRequest.getPyPath());

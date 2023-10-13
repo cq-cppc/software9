@@ -1,7 +1,7 @@
 package com.cqupt.software_9.service.imp;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.cqupt.software_9.dao.mysql.UserLogMapper;
+import com.cqupt.software_9.mapper.UserLogMapper;
 import com.cqupt.software_9.entity.UserLog;
 import com.cqupt.software_9.service.UserLogService;
 import org.springframework.beans.factory.annotation.Autowired;

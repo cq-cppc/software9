@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.cqupt.software_9.dao.mysql")
+@MapperScan("com.cqupt.software_9.mapper")
 public class Software9Application {
 
     public static void main(String[] args) {

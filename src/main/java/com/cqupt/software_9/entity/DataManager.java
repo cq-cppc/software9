@@ -1,6 +1,7 @@
 package com.cqupt.software_9.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
@@ -19,5 +20,15 @@ public class DataManager implements Serializable {
     private String  operators;
     private String  chinesename;
     private Integer featurenumber;
+
+    @TableField(value = "\"isProjection\"")
     private int isProjection;
+    private String tablename;
+    private String diseasename;
+    private String affiliationdatabase;
+    private String tabletype;
+    private String uploadmethod;
+    private Integer uid;
+
+
 }

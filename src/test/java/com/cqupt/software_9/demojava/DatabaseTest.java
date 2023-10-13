@@ -1,5 +1,7 @@
 package com.cqupt.software_9.demojava;
 
+import com.cqupt.software_9.entity.trainAl;
+import com.cqupt.software_9.mapper.ModelMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -7,6 +9,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
+
+import javax.annotation.Resource;
 
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
@@ -16,6 +20,11 @@ public class DatabaseTest {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Resource
+    private trainAl trainAl;
     @Test
     public void testDatabaseConnection() {
         // 执行数据库操作，例如插入、查询、更新等
@@ -31,6 +40,12 @@ public class DatabaseTest {
     }
 
     private void assertEquals(int i, int count) {
+    }
+
+
+    @Test
+    public void testDatabaseConnection2() {
+
     }
 }
 

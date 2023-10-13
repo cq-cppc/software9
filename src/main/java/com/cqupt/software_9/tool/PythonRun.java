@@ -1,8 +1,6 @@
 package com.cqupt.software_9.tool;
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.log4j.Log4j2;
-
 
 import java.io.*;
 import java.util.Arrays;
@@ -12,7 +10,7 @@ import java.util.Objects;
 
 @Log4j2
 public class PythonRun {
-    private String environment = "D:\\software\\Anaconda\\python.exe";
+    private String environment = "D:\\Anaconda\\envs\\test\\python.exe";
     private String root = null;
     private String cache = null;
     private boolean autoRemoveCache = true;
@@ -23,12 +21,12 @@ public class PythonRun {
         inputArgs.addAll(args);
         inputArgs.removeIf(Objects::isNull);//移除可能的 null 值
 
-        System.out.println(inputArgs);
+        System.out.println("===="+inputArgs);
         Process proc;
         String line;
         StringBuilder result = new StringBuilder();
-        System.out.println(inputArgs.toArray(new String[0]));
-        System.out.println(JSONObject.toJSONString(inputArgs.toArray(new String[0])));
+        System.out.println("____"+inputArgs.toArray(new String[0]));
+        System.out.println("____+"+JSONObject.toJSONString(inputArgs.toArray(new String[0])));
         proc = Runtime.getRuntime().exec(inputArgs.toArray(new String[0]));  //执行py文件
         BufferedReader in = getConsoleReader(proc.getInputStream());
         while ((line = in.readLine()) != null) {

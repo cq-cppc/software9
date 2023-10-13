@@ -1,7 +1,7 @@
 package com.cqupt.software_9.service.imp;
 
 
-import com.cqupt.software_9.dao.mysql.DataManagerMapper;
+import com.cqupt.software_9.mapper.DataManagerMapper;
 import com.cqupt.software_9.entity.DataManager;
 import com.cqupt.software_9.service.Adapter.DataManagerServiceAdapter;
 import com.github.pagehelper.PageHelper;

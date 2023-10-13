@@ -1,26 +1,24 @@
 package com.cqupt.software_9.service.imp;
 
 
-import com.cqupt.software_9.dao.mysql.dataTableManagerMapper;
+import com.cqupt.software_9.mapper.dataTableManagerMapper;
 import com.cqupt.software_9.entity.dataTable;
 import com.cqupt.software_9.service.Adapter.DataTableManagerServiceAdapter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
 @Service
 public class DataTableManagerServiceImpl extends DataTableManagerServiceAdapter {
-    @Value("${spring.datasource.mysql.url}")
+    @Value("${spring.datasource.url}")
     private String dbUrl;
-    @Value("${spring.datasource.mysql.username}")
+    @Value("${spring.datasource.username}")
     private String dbUsername;
-    @Value("${spring.datasource.mysql.password}")
+    @Value("${spring.datasource.password}")
     private String dbPassword;
     @Resource
     private dataTableManagerMapper dataTableManagerMapper;
@@ -75,7 +73,7 @@ public class DataTableManagerServiceImpl extends DataTableManagerServiceAdapter 
     }
 
     @Override
-    public void updateDataTable(String table_name,String disease) {
+    public void updateDataTable(String table_name,String disease, String user, Integer uid, String chinesename) {
         // 在这里实现计算样本数和特征数的逻辑
         int featurenumber = calculateFeatureNumber(table_name);
         int samplesize = calculateSampleSize(table_name);
@@ -84,10 +82,16 @@ public class DataTableManagerServiceImpl extends DataTableManagerServiceAdapter 
         dataTable dataTableEntity = new dataTable();
         dataTableEntity.setTablename(table_name);
         dataTableEntity.setFeaturenumber(featurenumber);
-        dataTableEntity.setDatanumber(samplesize);
-//        dataTableEntity.setTableType("Your Table Type"); // 替换为表类型信息
         dataTableEntity.setDiseasename(disease); // 替换为疾病信息
-        dataTableEntity.setOperators("陈鹏"); // 替换为创建者信息
+        dataTableEntity.setDatanumber(samplesize);
+        dataTableEntity.setLoadtime(Timestamp.valueOf(LocalDateTime.now()));
+        dataTableEntity.setTabletype("数据表");
+        dataTableEntity.setAffiliationdatabase("dataandresult");
+        dataTableEntity.setUploadmethod("直接导入");
+        dataTableEntity.setChinesename(chinesename);
+        dataTableEntity.setIsProjection(0);
+        dataTableEntity.setOperators(user); // 替换为创建者信息
+        dataTableEntity.setUid(uid);
 
         // 插入新样本数据到data_table表中
         dataTableManagerMapper.insertDataTable(dataTableEntity);
@@ -164,5 +168,10 @@ public class DataTableManagerServiceImpl extends DataTableManagerServiceAdapter 
     @Override
     public void deleteTableResult(String tableresult) {
         dataTableManagerMapper.deleteTableResult(tableresult);
+    }
+
+    @Override
+    public String getdiseasebyname(String table_name){
+        return dataTableManagerMapper.getdiseasebyname(table_name);
     }
 }

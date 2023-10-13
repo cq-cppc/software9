@@ -2,9 +2,9 @@ package com.cqupt.software_9.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cqupt.software_9.common.R;
-import com.cqupt.software_9.dao.mysql.CkdManagerMapper;
-import com.cqupt.software_9.dao.mysql.DataManagerMapper;
-import com.cqupt.software_9.dao.mysql.HeartManagerMapper;
+import com.cqupt.software_9.mapper.CkdManagerMapper;
+import com.cqupt.software_9.mapper.DataManagerMapper;
+import com.cqupt.software_9.mapper.HeartManagerMapper;
 import com.cqupt.software_9.service.DiseasesService;
 import com.cqupt.software_9.service.Request.RuntimeBusCreateRequest;
 import com.cqupt.software_9.service.Request.RuntimeBusCreateRequestSingleHeart;
@@ -23,7 +23,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
     @Log4j2
 @RestController
@@ -199,11 +202,14 @@ class RuntimeBusController {
          * */
         @PostMapping("/submit-hearts")
         public R<List<Map<String,Object>>> submitHearts(@RequestBody String tableName ) throws Exception {
-            System.out.println(tableName+"ooooo");
             String tableNameWithoutQuotes = tableName.replaceAll("\"", "");
-            System.out.println(tableName+"ppppp");
-          dataManagerMapper.updata(tableNameWithoutQuotes);
+            System.out.println(tableName);
+            dataManagerMapper.updata(tableNameWithoutQuotes);
             RuntimeBusServiceResponseHearts response = runtimeBusService.submitBus3(tableName);
+
+//            DataManager newData = new DataManager();
+//            newData = dataManagerMapper.getdetailBytableName(tableName);
+
             List<String> res = response.getRes();
             if (res == null || res.isEmpty()) {
                 // 处理无法获取输出表名的情况，可能需要返回适当的错误响应
@@ -216,8 +222,11 @@ class RuntimeBusController {
             JsonParser parser = new JsonParser();
             JsonObject json = parser.parse(outputTableNameJson).getAsJsonObject();
             String outputTableName = json.get("Output table name").getAsString();
+
 //            DataManager data = new DataManager();
+//
 //            data.setTablename(outputTableName);
+//
 //            dataManagerMapper.insertDataManager(data);
             List<Map<String, Object>> result = tableManagerService.getInfoByTableName(outputTableName);
             return new R<>(200, "成功", result);

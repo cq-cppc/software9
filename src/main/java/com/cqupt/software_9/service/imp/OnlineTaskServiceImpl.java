@@ -1,6 +1,6 @@
 package com.cqupt.software_9.service.imp;
 
-import com.cqupt.software_9.dao.mysql.OnlineTaskMapper;
+import com.cqupt.software_9.mapper.OnlineTaskMapper;
 import com.cqupt.software_9.entity.OnlineTask;
 import com.cqupt.software_9.service.Adapter.OnlineTaskServiceAdapter;
 import org.springframework.stereotype.Service;
