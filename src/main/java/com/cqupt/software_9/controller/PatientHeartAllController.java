@@ -5,6 +5,7 @@ import com.cqupt.software_9.service.PatientHeartAllService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.List;
 
@@ -12,14 +13,9 @@ import java.util.List;
 
 @RestController
 public class PatientHeartAllController {
+
+    @Resource
     private PatientHeartAllService patientHeartAllService;
-
-    @Autowired
-    public PatientHeartAllController(PatientHeartAllService patientHeartAllService)
-    {
-       this.patientHeartAllService=patientHeartAllService;
-    }
-
 
     /**
      * Author:陈鹏

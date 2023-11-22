@@ -19,7 +19,8 @@ from warnings import simplefilter
 simplefilter(action='ignore', category = FutureWarning)
 
 
-df = pd.read_csv('E:\software9\src\main\resources\Algorithm\Heart-Disease-Prediction-master\cleveland.csv', header = None)
+# df = pd.read_csv('E:\software9\src\main\resources\Algorithm\Heart-Disease-Prediction-master\cleveland.csv', header = None)
+df = pd.read_csv('E:\\soft\\software9-2\\software9\\src\\main\\resources\\Algorithm\\Heart-Disease-Prediction-master\\cleveland.csv', header = None)
 
 df.columns = ['age', 'sex', 'cp', 'trestbps', 'chol',
               'fbs', 'restecg', 'thalach', 'exang', 
@@ -54,40 +55,7 @@ xg = XGBClassifier()
 xg.fit(X_train, y_train)
 
 
-# y_pred = xg.predict(X_test)
-#
-# from sklearn.metrics import confusion_matrix
-# cm_test = confusion_matrix(y_pred, y_test)
-#
-# y_pred_train = xg.predict(X_train)
-#
-# for i in range(0, len(y_pred_train)):
-#     if y_pred_train[i]>= 0.5:       # setting threshold to .5
-#        y_pred_train[i]=1
-#     else:
-#        y_pred_train[i]=0
-#
-# cm_train = confusion_matrix(y_pred_train, y_train)
-# print()
-# print('Accuracy for training set for XGBoost = {}'.format((cm_train[0][0] + cm_train[1][1])/len(y_train)))
-# print('Accuracy for test set for XGBoost = {}'.format((cm_test[0][0] + cm_test[1][1])/len(y_test)))
-# model_filename = 'F:\Code\Heart-Disease-Prediction-master\model.pkl'
-# pickle.dump(classifier, open(model_filename, 'wb'))
 
-# 从控制台接收单例样本数据
-# age = float(input("请输入年龄："))
-# sex = input("请输入性别（female/male）：")
-# cp = float(input("请输入胸痛类型："))
-# trestbps = float(input("请输入静息血压："))
-# chol = float(input("请输入胆固醇："))
-# fbs = float(input("请输入空腹血糖："))
-# restecg = float(input("请输入静息心电图结果："))
-# thalach = float(input("请输入最大心率："))
-# exang = float(input("请输入运动诱发心绞痛："))
-# oldpeak = float(input("请输入运动引起ST段的压低："))
-# slope = float(input("请输入ST段的斜率："))
-# ca = float(input("请输入主要血管数："))
-# thal = float(input("请输入缺陷的类型："))
 
 
 
@@ -110,10 +78,48 @@ parser.add_argument("--thal", type=str, default=None)
 
 args = parser.parse_args()
 # # 将性别转换为数值表示
-if args.sex == 'female':
+if args.sex == '女':
     args.sex = 0
 else:
     args.sex = 1
+
+if args.cp == '典型心绞痛':
+    args.cp = 1
+elif args.cp =='非典型心绞痛':
+    args.cp = 2
+elif args.cp == '非心绞痛':
+    args.cp = 3
+else:
+    args.cp = 4
+
+if args.restecg == '正常':
+    args.restecg = 0
+elif args.restecg =='有ST-T波异常':
+    args.restecg = 1
+else:
+    args.restecg = 2
+
+if args.slope == '向上倾斜':
+    args.slope = 1
+elif args.slope =='平坦':
+    args.slope = 2
+else:
+    args.slope = 3
+
+if args.thal == '正常':
+    args.slope = 3
+elif args.slope =='固定缺陷':
+    args.slope = 6
+else:
+    args.slope = 7
+
+if args.exang == '是':
+    args.exang = 1
+else:
+    args.exang = 0
+
+
+
 
 
 
@@ -173,17 +179,4 @@ result_dict = [
 result_json = json.dumps(result_dict, ensure_ascii=False)
 print(result_json)
 
-# 预测单例样本
-# prediction = xg.predict(instance)
-#
-# # 输出预测结果
-# if prediction == 0:
-#     result="预测结果：无心脏病"
-# else:
-#     result="预测结果：有心脏病"
-#
-# result_dict = [result]
-#
-# # 将结果转换为JSON字符串并打印
-# result_json = json.dumps(result_dict)
-# print(result_json)
+

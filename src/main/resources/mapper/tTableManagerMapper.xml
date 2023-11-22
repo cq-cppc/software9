@@ -39,4 +39,14 @@
                                    is_label = #{label}
         where table_name = #{table_name} and field_name = #{fieldName}
     </update>
+
+    <insert id="insertTableNameAndFeature">
+        INSERT INTO t_table_manager (table_name, field_name,uesrid)
+        VALUES (#{table_name},#{field_name},#{uid})
+    </insert>
+
+
+    <select id="getFeatureByTableName" resultMap="tTableField">
+        SELECT field_name,is_label FROM t_table_manager WHERE table_name = #{tablename}
+    </select>
 </mapper>

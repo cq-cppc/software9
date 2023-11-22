@@ -18,4 +18,10 @@ public interface DataManagerMapper extends BaseMapper<DataManager> {
     String getTableNameByID(Integer id);
 
     List<Map<String, String>> getInfoByTableName(String tableName);
+
+    List<DataManager> getTableNameByUiD(Integer uid);
+
+    DataManager getdetailBytableName(String tablename);
+
+    List<String> getDiseaseName();
 }

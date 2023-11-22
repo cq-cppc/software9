@@ -46,24 +46,13 @@ if __name__ == "__main__":
 
     loaded_model = load_model(model_file_path)
 
-    # 假设有新的数据需要预测，将新数据组织成一个DataFrame或二维数组
-    # new_data = np.array([[2,1,2013,3,4,5,68,2,2,16,1,70,40,10,0,50,5,0,3,0,1,1,3,1,0,0]])  # 填写新数据的特征值
-    # feature = args.feature
-    # input_string = feature[0]
-    # numbers_list = input_string.split()
-    # idxs = [float(num) for num in numbers_list]
-    # feature = [[idxs]]
-    # # 对新数据进行预处理
-    # preprocessed_new_data = preprocess_new_data(feature)
     feature = args.feature[0].split()
     idxs = [float(num) for num in feature]
     preprocessed_new_data = preprocess_new_data([idxs])
 
     # 使用加载的模型进行预测
     predictions = make_predictions_proba(loaded_model, preprocessed_new_data)[:, 1]
-    # result = [{"分类概率：", predictions}]
-    # json_out = json.dumps(result)
-    # print(json_out)
-    result = [{"分类概率": predictions.tolist()}]
+    result = [{"分类概率：", predictions.tolist()}]
     json_out = json.dumps(result)
     print(json_out)
+

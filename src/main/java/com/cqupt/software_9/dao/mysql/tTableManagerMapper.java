@@ -15,4 +15,8 @@ public interface tTableManagerMapper extends BaseMapper<tTableManager> {
     void updateFieldValues(String table_name, String fieldName, String demography, String physiological, String sociology, String label);
     void insertTableManager(TableManagerDTO tableManagerDTO);
     void deletebyname(String tableName);
+
+    List<tTableField> getFeatureByTableName(String tablename);
+
+    void insertTableNameAndFeature(tTableManager tTableManager);
 }

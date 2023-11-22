@@ -19,11 +19,6 @@ public class OnlineTaskController {
      @Resource
      private OnlineTaskService onlineTaskService;
 
-     public OnlineTaskController(OnlineTaskService onlineTaskService){
-         this.onlineTaskService=onlineTaskService;
-     }
-
-
 
     @PostMapping("add")
     public List<OnlineTask> addTask(@RequestBody OnlineRequest onlineRequest){

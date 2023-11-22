@@ -7,23 +7,31 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, roc_curve, auc
 import joblib
+from sqlalchemy import create_engine
 
 # 假设你的数据库配置信息，可以根据实际情况进行修改
 
 def read_data_from_mysql(tableName,target,feature):
     # 假设你已经获得了数据库的连接参数，例如：host、user、password、database等
     # 请根据你自己的实际情况来填写这些参数
-    host = "localhost"
+    host = "10.14.4.14"
     user = "root"
-    password = "123456"
-    database = "data_tables"
-    # 连接到MySQL数据库
-    connection = mysql.connector.connect(host=host, user=user, password=password, database=database)
+    password = "root-cqupt"
+    database = "software9"
+
+    # 创建MySQL连接字符串
+    conn_str = f"mysql+mysqlconnector://{user}:{password}@{host}/{database}"
+    engine = create_engine(conn_str)
     # 读取数据到DataFrame
+
+    # 创建MySQL连接字符串
+    # conn_str = f"mysql+mysqlconnector://{user}:{password}@{host}/{database}"
+    # engine = create_engine(conn_str)
     query = f"SELECT * FROM {tableName}"
-    data = pd.read_sql(query, connection)
+    data = pd.read_sql(query, engine)
     # 关闭数据库连接
-    connection.close()
+    # engine.close()
+    engine.dispose()
     # 分离特征和目标列
     # 分离特征和目标列
     X = data.iloc[:, feature]
