@@ -27,4 +27,5 @@ public class OnlineTask implements Serializable {
     private String   targetcolumn;
     private String   modelpath;
     private String   result;
+    private Integer  uid;
 }

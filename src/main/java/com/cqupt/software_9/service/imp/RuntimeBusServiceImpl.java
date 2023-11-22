@@ -51,7 +51,9 @@ public class RuntimeBusServiceImpl extends RuntimeBusServiceAdapter {
         // runtimeTaskRequest.setTaskType(TaskType.runtime.toString());
         // runtimeTaskRequest.setArgs(args);
         // runtimeTaskRequest.setBizId(request.getBusId());
-        runtimeTaskRequest.setPyPath("E:/software9/src/main/resources/Algorithm/Disease-prediction-using-Machine-Learning-master/test4.py");
+//        runtimeTaskRequest.setPyPath("F:/Code/Disease-prediction-using-Machine-Learning-master/test4.py");
+//        runtimeTaskRequest.setPyPath("/home/data/WorkSpace/software9/Arithmetic/Disease-prediction/test4.py");
+        runtimeTaskRequest.setPyPath("/home/BackEnd/software9/Arithmetic/Disease-prediction/test4.py");
         runtimeTaskRequest.setArgs(args);
         System.out.println("Python脚本路径：" + runtimeTaskRequest.getPyPath());
 
@@ -85,7 +87,10 @@ public class RuntimeBusServiceImpl extends RuntimeBusServiceAdapter {
 
 
         RuntimeTaskRequest runtimeTaskRequest=new RuntimeTaskRequest();
-        runtimeTaskRequest.setPyPath("E:/software9/src/main/resources/Algorithm/Heart-Disease-Prediction-master/heart_code-test1.1.1.PY");
+//        runtimeTaskRequest.setPyPath("F:/Code/Heart-Disease-Prediction-master/heart_code-test1.1.1.PY");
+//        runtimeTaskRequest.setPyPath("/home/data/WorkSpace/software9/Arithmetic/Heart-Disease-Prediction/heart_code-test1.1.1.py");
+        runtimeTaskRequest.setPyPath("/home/BackEnd/software9/Arithmetic/Heart-Disease-Prediction/heart_code-test1.1.1.py");
+
         runtimeTaskRequest.setArgs(args);
         System.out.println("Python脚本路径：" + runtimeTaskRequest.getPyPath());
 
@@ -119,7 +124,11 @@ public class RuntimeBusServiceImpl extends RuntimeBusServiceAdapter {
         }
 
         RuntimeTaskRequest runtimeTaskRequest=new RuntimeTaskRequest();
-        runtimeTaskRequest.setPyPath("E:/software9/src/main/resources/Algorithm/Heart-Disease-Prediction-master/heart_code-test1.1.1.PY");
+//        runtimeTaskRequest.setPyPath("F:/Code/Heart-Disease-Prediction-master/heart_code-test1.1.1.PY");
+//        runtimeTaskRequest.setPyPath("/home/data/WorkSpace/software9/Arithmetic/Heart-Disease-Prediction/heart_code-
+        runtimeTaskRequest.setPyPath("/home/BackEnd/software9/Arithmetic/Heart-Disease-Prediction/heart_code-test1.1.1.py");
+
+//        runtimeTaskRequest.setPyPath("E:\\soft\\software9-2\\software9\\src\\main\\resources\\Algorithm\\Heart-Disease-Prediction-master\\heart_code-test1.1.1.py");
         runtimeTaskRequest.setArgs(args);
         System.out.println("Python脚本路径：" + runtimeTaskRequest.getPyPath());
 
@@ -140,7 +149,9 @@ public class RuntimeBusServiceImpl extends RuntimeBusServiceAdapter {
         System.out.println(args);
         RuntimeTaskRequest runtimeTaskRequest=new RuntimeTaskRequest();
 
-        runtimeTaskRequest.setPyPath("E:/software9/src/main/resources/Algorithm/Heart-Disease-Prediction-master/heart_code-test2.1.PY");
+//      runtimeTaskRequest.setPyPath("/home/data/WorkSpace/software9/Arithmetic/Heart-Disease-Prediction/heart_code-test2.1.py");
+        runtimeTaskRequest.setPyPath("/home/BackEnd/software9/Arithmetic/Heart-Disease-Prediction/heart_code-test2.1.py");
+
         runtimeTaskRequest.setArgs(args);
         System.out.println("Python脚本路径：" + runtimeTaskRequest.getPyPath());
 
@@ -149,23 +160,23 @@ public class RuntimeBusServiceImpl extends RuntimeBusServiceAdapter {
         return response;
     }
     //批量调用ckd模型
-    public RuntimeBusServiceResponseHearts submitBus4(String tableName) throws Exception {
-
-        RuntimeBusServiceResponseHearts response=new RuntimeBusServiceResponseHearts();
-
-        List<String> args = new ArrayList<>();
-        args.add("--tableName");
-        args.add(tableName);
-        System.out.println(args);
-        RuntimeTaskRequest runtimeTaskRequest=new RuntimeTaskRequest();
-
-        runtimeTaskRequest.setPyPath("E:/software9/src/main/resources/Algorithm/CKD-Prediction-master/mutli_prediction.py");
-        runtimeTaskRequest.setArgs(args);
-        System.out.println("Python脚本路径：" + runtimeTaskRequest.getPyPath());
-
-        RuntimeTaskResponse taskResponse=runtimeTaskService.submitTask(runtimeTaskRequest);
-        response.setRes(taskResponse.getRes());
-        return response;
-    }
+//    public RuntimeBusServiceResponseHearts submitBus4(String tableName) throws Exception {
+//
+//        RuntimeBusServiceResponseHearts response=new RuntimeBusServiceResponseHearts();
+//
+//        List<String> args = new ArrayList<>();
+//        args.add("--tableName");
+//        args.add(tableName);
+//        System.out.println(args);
+//        RuntimeTaskRequest runtimeTaskRequest=new RuntimeTaskRequest();
+//
+//        runtimeTaskRequest.setPyPath("F:/Code/CKD-Prediction-master/mutli_prediction.py");
+//        runtimeTaskRequest.setArgs(args);
+//        System.out.println("Python脚本路径：" + runtimeTaskRequest.getPyPath());
+//
+//        RuntimeTaskResponse taskResponse=runtimeTaskService.submitTask(runtimeTaskRequest);
+//        response.setRes(taskResponse.getRes());
+//        return response;
+//    }
 
 }

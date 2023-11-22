@@ -1,14 +1,19 @@
 package com.cqupt.software_9.service.imp;
 
 import com.cqupt.software_9.common.UploadResult;
+import com.cqupt.software_9.dao.mysql.DataManagerMapper;
+import com.cqupt.software_9.entity.DataManager;
+import com.cqupt.software_9.entity.tTableManager;
 import com.cqupt.software_9.service.Adapter.FileServiceAdapter;
 import com.cqupt.software_9.service.DataTableManagerService;
 import com.opencsv.CSVReader;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Connection;
@@ -18,13 +23,21 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class FileServiceImpl extends FileServiceAdapter {
 
     @Resource
     private DataTableManagerService dataTableManagerService;
+
+    @Resource
+    private JdbcTemplate jdbcTemplate;
+    @Resource
+    private DataManagerMapper dataManagerMapper;
+    @Resource
+    private com.cqupt.software_9.dao.mysql.tTableManagerMapper tTableManagerMapper;
 
     @Value("${spring.datasource.mysql.url}")
     private String dbUrl;
@@ -469,4 +482,114 @@ public class FileServiceImpl extends FileServiceAdapter {
         return sb.toString();
     }
 
+
+
+
+
+    //在线训练
+    @Override
+    public UploadResult fileUpload(MultipartFile file, String modelname, String diseasename,String Publisher,Integer uid) throws IOException {
+        System.out.println(file.getOriginalFilename());
+        DataManager dataManager = new DataManager();
+        tTableManager tTableManager = new tTableManager();
+        if (!file.getOriginalFilename().endsWith(".csv")) {
+            throw new IllegalArgumentException("Only CSV files are supported.");
+        }
+
+        String tableName = file.getOriginalFilename().replace(".csv", "");
+
+        List<String> tableHeaders = null;
+        List<String[]> rows = new ArrayList<>(); // 存储处理后的数据行
+
+        try (CSVReader csvReader = new CSVReader(new InputStreamReader(file.getInputStream()));
+             Connection connection = jdbcTemplate.getDataSource().getConnection();
+             BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))
+        ) {
+            String[] columnNames = csvReader.readNext();
+            //去空格
+            tableHeaders = new ArrayList<>();
+            for (int i = 0; i < columnNames.length; i++) {
+                String columnName = columnNames[i].trim();
+                if (!columnName.isEmpty()) {
+                    tableHeaders.add(columnName);
+                    String fea = columnNames[i];
+                    tTableManager.setTable_name(tableName);
+                    tTableManager.setField_name(fea);
+                    tTableManager.setUserid(uid);
+                    tTableManagerMapper.insertTableNameAndFeature(tTableManager);
+
+                }
+            }
+            String[] tableHeadersArray = tableHeaders.toArray(new String[0]);
+            System.out.println(tableHeaders);
+            // 读取数据行并删除空表头对应的整列数据
+//            csvReader.readNext();
+            String[] row;
+            while ((row = csvReader.readNext()) != null) {
+
+                String[] newRow = new String[tableHeaders.size()];
+                int newIndex = 0;
+                for (int i = 0; i < row.length; i++) {
+                    if (!columnNames[i].trim().isEmpty()) {
+                        newRow[newIndex++] = row[i];
+
+                    }
+
+                }
+                rows.add(newRow);
+            }
+
+            /*向data_manager中插入数据*/
+            dataManager.setTablename(tableName);
+            dataManager.setDiseasename(diseasename);
+            dataManager.setDatanumber(rows.size());
+            dataManager.setAffiliationdatabase("dataandresult");
+            dataManager.setOperators(Publisher);
+            dataManager.setTabletype("数据表");
+            dataManager.setUploadmethod("手动上传");
+            dataManager.setChinesename("111");
+            dataManager.setFeaturenumber(columnNames.length);
+            dataManager.setUid(uid);
+            dataManagerMapper.insertDataManager(dataManager);
+
+            /*根据传入数据在数据库中创建一张新表*/
+            createTable(connection,tableName,tableHeaders,rows);
+            /*将剩余数据插入到表中*/
+            for (int i = 1; i < rows.size(); i++) {
+                String[] myRow = rows.get(i);
+                String insertSql = "INSERT INTO " + tableName + " VALUES " + toInsertSql(myRow);
+                jdbcTemplate.update(insertSql);
+            }
+            System.out.println("数据导入成功");
+
+            /*将数据表的名称和标签，插入到数据表t_table_manager中*/
+
+        } catch (IOException  e) {
+            throw new RuntimeException("Failed to read CSV file.", e);
+        }catch(SQLException e){
+            e.printStackTrace();
+            System.out.println("数据导入失败");
+        }
+
+        UploadResult result = new UploadResult();
+        result.setTableName(tableName);
+        result.setTableHeaders(tableHeaders);
+        result.setCode(200);
+
+//        result.setRes(res);
+        return result;
+    }
+
+    private String toInsertSql(String[] myRow) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("(");
+        for (int i = 0; i < myRow.length; i++) {
+            sb.append(myRow[i]);
+            if (i < myRow.length - 1) {
+                sb.append(",");
+            }
+        }
+        sb.append(")");
+        return sb.toString();
+    }
 }

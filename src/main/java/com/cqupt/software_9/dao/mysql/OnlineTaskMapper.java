@@ -9,4 +9,5 @@ import java.util.List;
 public interface OnlineTaskMapper extends BaseMapper<OnlineTask> {
     void addOnlineTask(OnlineTask onlineTask);
     List<OnlineTask> upall();
+    List<OnlineTask> getAllById(Integer uid);
 }

@@ -10,7 +10,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -37,7 +36,12 @@ public class OnlineUseServiceImpl extends OnlineUseServiceAdapter {
         args.add("--model_file_path="+request.getPath());
         System.out.println(args);
         RuntimeTaskRequest runtimeTaskRequest=new RuntimeTaskRequest();
-        runtimeTaskRequest.setPyPath("F:/code/Online training/Projection-test.py");
+//        runtimeTaskRequest.setPyPath("F:/code/Online training/Projection-test.py");
+//        runtimeTaskRequest.setPyPath("/home/data/WorkSpace/software9/Arithmetic/Online/Projection-test.py");
+        runtimeTaskRequest.setPyPath("/home/BackEnd/software9/Arithmetic/Online/Projection-test.py");
+
+//        runtimeTaskRequest.setPyPath("E:\\soft\\software9-2\\software9\\src\\main\\resources\\Algorithm\\Online training\\Projection-test.py");
+
         runtimeTaskRequest.setArgs(args);
         RuntimeTaskResponse taskResponse=runtimeTaskService.submitTask(runtimeTaskRequest);
         response.setRes(taskResponse.getRes());

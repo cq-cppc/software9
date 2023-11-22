@@ -20,9 +20,9 @@ from sqlalchemy import create_engine
 
 def read_data_from_mysql(tableName,target,feature):
 
-    host = "10.16.48.219"
+    host = "10.14.4.14"
     user = "root"
-    password = "111111"
+    password = "root-cqupt"
     database = "software9"
 
     # 创建MySQL连接字符串

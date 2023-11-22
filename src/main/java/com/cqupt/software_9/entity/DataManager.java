@@ -20,4 +20,12 @@ public class DataManager implements Serializable {
     private String  chinesename;
     private Integer featurenumber;
     private int isProjection;
+    private String tablename;
+    private String diseasename;
+    private String affiliationdatabase;
+    private String tabletype;
+    private String uploadmethod;
+    private Integer uid;
+
+
 }

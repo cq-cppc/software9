@@ -15,6 +15,11 @@ public class FileServiceAdapter implements FileService {
     }
 
     @Override
+    public UploadResult fileUpload(MultipartFile file, String modelname, String diseasename, String Publisher, Integer uid) throws IOException {
+        return null;
+    }
+
+    @Override
     public UploadResult creatUpTable(MultipartFile file, String newName, String disease, String user, Integer uid, String chinesename) {
         return null;
     }

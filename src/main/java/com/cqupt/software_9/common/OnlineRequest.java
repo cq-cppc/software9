@@ -11,7 +11,7 @@ public class OnlineRequest {
     private String  taskName;
     private String  leader;
     private String   disease;
-    private String   model;
+    private String   modelname;
     private String   remark;
 
     private String[]   feature;
@@ -21,5 +21,6 @@ public class OnlineRequest {
     private String   targetcolumn;
     private String   modelpath;
     private String[]  result;
+    private Integer   uid;
 
 }

@@ -25,12 +25,12 @@
         VALUES (#{table_desc}, #{table_name}, #{featurenumber},#{samplesize}, #{table_type}, #{disease},#{creator})
     </insert>
     <select id="findTargetColumnIndex" resultType="java.lang.Integer">
-        SELECT ORDINAL_POSITION
-        FROM INFORMATION_SCHEMA.COLUMNS
-        WHERE TABLE_NAME = #{tablename}
-        AND COLUMN_NAME = #{targetcolumn}
-        LIMIT 1
-    </select>
+    SELECT ORDINAL_POSITION
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_NAME = #{tablename}
+    AND COLUMN_NAME = #{targetcolumn}
+     LIMIT 1
+</select>
     <select id="upallDataByUid" resultType="com.cqupt.software_9.entity.dataTable">
 
     </select>

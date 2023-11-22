@@ -7,12 +7,14 @@
 <mapper namespace="com.cqupt.software_9.dao.mysql.DataManagerMapper">
 
 
-
+    <select id="getdetail" resultType="com.cqupt.software_9.entity.DataManager">
+        select * from data_manager where tablename = #{tableName}
+    </select>
     <select id="getDataManagerwithoutresult" resultType="com.cqupt.software_9.entity.DataManager">
         SELECT * FROM data_manager where tabletype = '数据表'
     </select>
     <select id="getDetail" resultType="com.cqupt.software_9.entity.DataManager">
-        select id,datanumber,operators,chinesename,featurenumber,isProjection from data_manager where tabletype = '数据表' and diseasename = #{diseasename}
+        select  tablename,id,datanumber,operators,chinesename,featurenumber,isProjection from data_manager where tabletype = '数据表' and diseasename = #{diseasename}
     </select>
     <select id="getTableNameByID" resultType="java.lang.String">
         select tablename from data_manager where id = #{id}
@@ -26,11 +28,17 @@
          SET isProjection = 1
         WHERE tablename = #{tableName}
     </update>
+
+    <select id="getTableNameByUiD" resultType="com.cqupt.software_9.entity.DataManager">
+        SELECT tablename FROM data_manager WHERE uid = #{uid}
+    </select>
 <!--    <insert id="insertDataManager" parameterType="com.cqupt.software_9.entity.DataManager">-->
 <!--        INSERT INTO data_manager (tablename, diseasename, datanumber, loadtime, Operators, affiliationdatabase, tabletype, uploadmethod, chinesename, featurenumber, isProjection)-->
 <!--        VALUES (#{tablename}, "心脏病", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)-->
 <!--    </insert>-->
-
+    <select id="getDiseaseName" resultType="java.lang.String">
+        select DISTINCT diseasename from data_manager
+    </select>
 
 
 </mapper>

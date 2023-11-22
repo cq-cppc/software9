@@ -7,12 +7,16 @@
 <mapper namespace="com.cqupt.software_9.dao.mysql.OnlineTaskMapper">
 
     <insert id="addOnlineTask">
-             INSERT INTO onlinetask (taskName, leader,disease,model,remark,feature,parameters,targetcolumn,modelpath,result,parametersValue)
-             VALUES (#{taskName}, #{leader},#{disease}, #{model}, #{remark},#{feature},#{parameters},#{targetcolumn},#{modelpath},#{result},#{parametersValue})
+             INSERT INTO onlinetask (taskName, leader,disease,model,remark,feature,parameters,targetcolumn,modelpath,result,parametersValue,uid)
+             VALUES (#{taskName}, #{leader},#{disease}, #{model}, #{remark},#{feature},#{parameters},#{targetcolumn},#{modelpath},#{result},#{parametersValue},#{uid})
     </insert>
 
     <select id="upall" resultType="com.cqupt.software_9.entity.OnlineTask">
          SELECT * FROM onlinetask
+    </select>
+
+    <select id="getAllById" resultType="com.cqupt.software_9.entity.OnlineTask">
+        select * from onlinetask where uid=#{uid};
     </select>
 
 </mapper>
