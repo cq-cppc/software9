@@ -1,5 +1,7 @@
 # 导入必要的库
 import argparse
+import os
+from datetime import datetime
 import csv
 import sys
 import psycopg2
@@ -7,7 +9,7 @@ import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 from scikitplot.metrics import plot_roc_curve, plot_precision_recall_curve, plot_confusion_matrix
-
+import joblib
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from sklearn.metrics import roc_curve, auc
 from sklearn.model_selection import train_test_split
@@ -120,6 +122,19 @@ def publicAl(tableName, target, fea, algorithmName, algorithmAttributes):
     # 模型训练
     trained_model = train_model(model, X_train, y_train)
 
+    model_file = '{}_{}.pkl'.format(datetime.now().strftime('%Y%m%d%H%M%S'), algorithmName)
+    output_dir = 'E:\\soft\\software9-3\\software9\\src\\main\\resources\\Algorithm\\PKL'
+    model_path = os.path.join(output_dir, model_file)
+    joblib.dump(trained_model, model_path)
+
+    # 创建文件夹（如果不存在）
+    folder_name = datetime.now().strftime('%Y%m%d%H%M%S')+ '_' + algorithmName
+    output_dir = 'E:\\soft\\software9-3\\software9\\src\\main\\resources\\Algorithm\\picture\\{}'.format(folder_name)
+    os.makedirs(output_dir, exist_ok=True)
+    os.chdir(output_dir)
+
+
+
     # 获取概率预测结果
     y_proba = trained_model.predict_proba(X_test)
     # 提取预测结果的概率值（第二列）
@@ -140,7 +155,7 @@ def publicAl(tableName, target, fea, algorithmName, algorithmAttributes):
     plt.title('Receiver Operating Characteristic (ROC)')
     plt.legend(loc="lower right")
     plt.savefig('roc_curve.png')  # 保存 ROC 曲线图形
-    plt.show()
+    plt.close()
 
     # 2. 计算 PR 曲线
     precision, recall, _ = precision_recall_curve(y_test, y_proba_positive)
@@ -177,8 +192,9 @@ def publicAl(tableName, target, fea, algorithmName, algorithmAttributes):
     plt.barh(range(len(feature_importances)), feature_importances, tick_label=fea)
     plt.xlabel('Feature Importance')
     plt.ylabel('Feature')
-    plt.title('Random Forest Feature Importance')
+    plt.title('Feature Importance')
     plt.savefig("feature_importance.png")
+
 
     # 模型评估
     accuracy, precision, recall, f1 = evaluate_model(trained_model, X_test, y_test)
@@ -186,10 +202,9 @@ def publicAl(tableName, target, fea, algorithmName, algorithmAttributes):
     # 将结果保存到字典中
     results = {'accuracy': accuracy, 'precision': precision, 'recall': recall, 'f1': f1}
 
-    return results
+    return results,output_dir,model_path
 
-def test(tableName, target, fea, algorithmName, algorithmAttributes):
-    return tableName, target, fea, algorithmName, algorithmAttributes
+
 
 def parse_algorithm_attributes(attr_list):
     attributes = {}
@@ -200,51 +215,51 @@ def parse_algorithm_attributes(attr_list):
 
 if __name__ == "__main__":
 
-    # tableName = "heart1test"
-    # target = "label"
-    # # fea = ["age", "sex", "cp", "trestbps", "chol", "fbs", "restecg", "thalach", "exang", "oldpeak", "slope", "ca",
-    # #        "thal"]
-    # fea = ["Marital status at diagnosis","Sex","Race recode (White, Black, Other)","Race recode (W, B, AI, API)",
-    # "Diagnostic Confirmation","Derived AJCC M, 6th ed (2004-2015)","RX Summ--Scope Reg LN Sur (2003+)",
-    # "RX Summ--Surg Oth Reg/Dis (2003+)","RX Summ--Surg/Rad Seq","Reason no cancer-directed surgery",
-    # "Radiation recode","Chemotherapy recode (yes, no/unk)","RX Summ--Systemic/Sur Seq","SEER Combined Mets at DX-bone (2010+)",
-    # "SEER Combined Mets at DX-brain (2010+)","SEER Combined Mets at DX-liver (2010+)","SEER Combined Mets at DX-lung (2010+)",
-    # "SEER cause-specific death classification","SEER other cause of death classification","Survival months flag",
-    # "Vital status recode (study cutoff used)"]
-    # algorithmName = "RF"
-    # algorithmAttributes = {"bootstrap": True,
-    #                        "criterion": "gini",
-    #                        "max_depth": None,
-    #                        "class_weight": None,
-    #                        "max_features": None,
-    #                        "n_estimators": 100,
-    #                        "random_state": None,
-    #                        "min_samples_leaf": 1,
-    #                        "min_samples_split": 2}
+    tableName = "heart1test"
+    target = "label"
+    # fea = ["age", "sex", "cp", "trestbps", "chol", "fbs", "restecg", "thalach", "exang", "oldpeak", "slope", "ca",
+    #        "thal"]
+    fea = ["Marital status at diagnosis","Sex","Race recode (White, Black, Other)","Race recode (W, B, AI, API)",
+    "Diagnostic Confirmation","Derived AJCC M, 6th ed (2004-2015)","RX Summ--Scope Reg LN Sur (2003+)",
+    "RX Summ--Surg Oth Reg/Dis (2003+)","RX Summ--Surg/Rad Seq","Reason no cancer-directed surgery",
+    "Radiation recode","Chemotherapy recode (yes, no/unk)","RX Summ--Systemic/Sur Seq","SEER Combined Mets at DX-bone (2010+)",
+    "SEER Combined Mets at DX-brain (2010+)","SEER Combined Mets at DX-liver (2010+)","SEER Combined Mets at DX-lung (2010+)",
+    "SEER cause-specific death classification","SEER other cause of death classification","Survival months flag",
+    "Vital status recode (study cutoff used)"]
+    algorithmName = "RF"
+    algorithmAttributes = {"bootstrap": True,
+                           "criterion": "gini",
+                           "max_depth": None,
+                           "class_weight": None,
+                           "max_features": None,
+                           "n_estimators": 100,
+                           "random_state": None,
+                           "min_samples_leaf": 1,
+                           "min_samples_split": 2}
     # 获取命令行参数
-    args = sys.argv[1:]  # 第一个参数是脚本文件路径，因此从第二个参数开始读取
+    # args = sys.argv[1:]  # 第一个参数是脚本文件路径，因此从第二个参数开始读取
+    #
+    # # 解析参数
+    # tableName = args[0]
+    # target = args[1]
+    # fea = sys.argv[3].split(',')  # 将逗号分隔的字符串转换为列表
+    # algorithmName = sys.argv[4]
+    # algorithmAttributes_str = args[4:]  # 获取算法属性字符串列表
+    #
+    # # 解析算法属性为字典
+    # algorithmAttributes = {}
+    # for attr_str in algorithmAttributes_str:
+    #     key, value = attr_str.split('=')
+    #     if value.lower() == 'true':
+    #         algorithmAttributes[key] = True
+    #     elif value.lower() == 'false':
+    #         algorithmAttributes[key] = False
+    #     elif value.lower() == 'none':
+    #         algorithmAttributes[key] = None
+    #     elif value.isdigit():
+    #         algorithmAttributes[key] = int(value)
+    #     else:
+    #         algorithmAttributes[key] = value
 
-    # 解析参数
-    tableName = args[0]
-    target = args[1]
-    fea = sys.argv[3].split(',')  # 将逗号分隔的字符串转换为列表
-    algorithmName = sys.argv[4]
-    algorithmAttributes_str = args[4:]  # 获取算法属性字符串列表
-
-    # 解析算法属性为字典
-    algorithmAttributes = {}
-    for attr_str in algorithmAttributes_str:
-        key, value = attr_str.split('=')
-        if value.lower() == 'true':
-            algorithmAttributes[key] = True
-        elif value.lower() == 'false':
-            algorithmAttributes[key] = False
-        elif value.lower() == 'none':
-            algorithmAttributes[key] = None
-        elif value.isdigit():
-            algorithmAttributes[key] = int(value)
-        else:
-            algorithmAttributes[key] = value
-
-    results = test(tableName, target, fea, algorithmName, algorithmAttributes)
-    print(results)
+    results, output_dir,model_path= publicAl(tableName, target, fea, algorithmName, algorithmAttributes)
+    print(results, output_dir,model_path)
