@@ -8,6 +8,7 @@ import com.cqupt.software_9.service.Request.Query;
 import com.cqupt.software_9.service.Response.Result;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,13 +18,12 @@ import java.util.Map;
 @RestController
 public class DiseasesController {
 
+    @Resource
     private DiseasesService diseasesService;
 
+    @Resource
     private HeartManagerService heartManagerService;
-    public DiseasesController(DiseasesService diseasesService,HeartManagerService heartManagerService) {
-        this.diseasesService = diseasesService;
-        this.heartManagerService=heartManagerService;
-    }
+
     /**
      * 分页查询
      * @param queryDTO
@@ -44,16 +44,13 @@ public class DiseasesController {
 //            // 返回结果或记录列表为空，可以创建适当的错误信息或处理方式
 //            return new Result(500, "User list is empty.", null);
 //        }
-
-
-       return new Result(200,"",diseasesService.selectDiseasesPage(queryDTO));
+        return new Result(200,"",diseasesService.selectDiseasesPage(queryDTO));
     }
 
-     @GetMapping("/api/diseases/listcode")
+    @GetMapping("/api/diseases/listcode")
     public Result diseasesList1(String code){
-
         return new Result(200,"",diseasesService.getInfobycode(code));
-     }
+    }
 
     @GetMapping("/api/diseases/loadall")
     public List<Diseases> getAllDiseases() {
@@ -76,57 +73,80 @@ public class DiseasesController {
     {
         return diseasesService.findpartNamebyCode(code);
     }
+
     @GetMapping("/api/diseases/findnamebycode/{code}")
     public String getnamebycode(@PathVariable String code)
     {
         return diseasesService.findnamebyCode(code);
     }
+
     @GetMapping("/api/diseases/findsympbycode/{code}")
     public String getsympbycode(@PathVariable String code)
     {
         return diseasesService.findsympbyCode(code);
     }
+
     @GetMapping("/api/diseases/finddptmentbycode/{code}")
     public String getdptmentbycode(@PathVariable String code)
     {
         return diseasesService.finddptmentbyCode(code);
     }
+
     @GetMapping("/api/diseases/findpreventbycode/{code}")
     public String getpreventbycode(@PathVariable String code)
     {
         return diseasesService.findpreventbyCode(code);
     }
+
     @PostMapping("/api/diseases/findbypartNameAndName")
     public List<Map<String, Object>>groupDiseases() {
-        // 创建一个空的Map，用于按partName分组的数据存储
-        Map<String, List<String>> groupedData = new HashMap<>();
+//        // 创建一个空的Map，用于按partName分组的数据存储
+//        Map<String, List<String>> groupedData = new HashMap<>();
+//        List<Diseases> diseases = diseasesService.getAllDiseases();
+//        // 遍历diseases，将partName和name添加到对应的列表中
+//        for (Diseases disease : diseases) {
+//            String partName = disease.getPartName();
+//            String name = disease.getName();
+//
+//            if (!groupedData.containsKey(partName)) {
+//                groupedData.put(partName, new ArrayList<>());
+//            }
+//            groupedData.get(partName).add(name);
+//        }
+//
+//        // 创建一个空的List，用于存储最终的封装结果
+//        List<Map<String, Object>> resultList = new ArrayList<>();
+//
+//        // 遍历groupedData，将每个partName和对应的name列表封装到Map中，然后添加到resultList中
+//        for (Map.Entry<String, List<String>> entry : groupedData.entrySet()) {
+//            String partName = entry.getKey();
+//            List<String> nameList = entry.getValue();
+//
+//            Map<String, Object> partObject = new HashMap<>();
+//            partObject.put("partName", partName);
+//            partObject.put("name", nameList);
+//
+//            resultList.add(partObject);
+//        }
+//
+//        return resultList;
         List<Diseases> diseases = diseasesService.getAllDiseases();
-        // 遍历diseases，将partName和name添加到对应的列表中
+        Map<String, List<String>> groupedData = new HashMap<>();
+        // 将疾病按partName分组
         for (Diseases disease : diseases) {
             String partName = disease.getPartName();
             String name = disease.getName();
 
-            if (!groupedData.containsKey(partName)) {
-                groupedData.put(partName, new ArrayList<>());
-            }
-            groupedData.get(partName).add(name);
+            groupedData.computeIfAbsent(partName, k -> new ArrayList<>()).add(name);
         }
-
-        // 创建一个空的List，用于存储最终的封装结果
         List<Map<String, Object>> resultList = new ArrayList<>();
-
-        // 遍历groupedData，将每个partName和对应的name列表封装到Map中，然后添加到resultList中
-        for (Map.Entry<String, List<String>> entry : groupedData.entrySet()) {
-            String partName = entry.getKey();
-            List<String> nameList = entry.getValue();
-
+        // 将分组后的数据封装到结果列表中
+        groupedData.forEach((partName, nameList) -> {
             Map<String, Object> partObject = new HashMap<>();
             partObject.put("partName", partName);
             partObject.put("name", nameList);
-
             resultList.add(partObject);
-        }
-
+        });
         return resultList;
     }
 
@@ -165,7 +185,6 @@ public class DiseasesController {
 
             resultList.add(partObject);
         }
-
         return resultList;
     }
 

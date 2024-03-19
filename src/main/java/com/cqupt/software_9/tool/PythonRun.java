@@ -3,10 +3,7 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Log4j2
 public class PythonRun {
@@ -77,42 +74,38 @@ public class PythonRun {
         return result.toString();
     }
 
+    public String publicAl(String path, String tableName, String target, String[] fea,
+                           String algorithmName, Map<String, String> algorithmAttributes) throws Exception {
+//        path = createNewPy(path);
+        String feaString = String.join(",", fea);
+        List<String> inputArgs = new LinkedList<>(Arrays.asList(environment, path, tableName, target, feaString,algorithmName));//设定命令行
 
- /*public String run(String path, List<String> args) throws Exception {
-     List<String> command = new LinkedList<>();
-     command.add("D:/software/Anaconda/python");  // Python解释器的路径，如果已将其添加到系统环境变量中，可以省略这一行
+        for (Map.Entry<String, String> entry : algorithmAttributes.entrySet()) {
+            inputArgs.add(entry.getKey() + "=" + entry.getValue());
+        }
+        inputArgs.removeIf(Objects::isNull);//移除可能的 null 值
 
-     // 添加Python脚本路径和参数
-     command.add(path);
-     command.addAll(args);
-
-     ProcessBuilder processBuilder = new ProcessBuilder(command);
-     Process process = processBuilder.start();
-
-     BufferedReader inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-     StringBuilder result = new StringBuilder();
-     String line;
-     while ((line = inputReader.readLine()) != null) {
-         result.append(line).append("\n");
-     }
-     inputReader.close();
-
-     int exitValue = process.waitFor();
-     log.info("Python exitValue: " + exitValue);
-     if (exitValue == 0) {
-         log.info("Python 代码结果：" + result);
-     } else {
-         BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-         while ((line = errorReader.readLine()) != null) {
-             log.error(line);
-         }
-         errorReader.close();
-     }
-
-     return result.toString();
- }
-*/
-
+        Process proc;
+        String line;
+        StringBuilder result = new StringBuilder();
+        proc = Runtime.getRuntime().exec(inputArgs.toArray(new String[0]));  //执行py文件
+        BufferedReader in = getConsoleReader(proc.getInputStream());
+        while ((line = in.readLine()) != null) {
+            result.append(line).append("\n");
+        }
+        int exitValue = proc.waitFor();
+        log.info("Python exitValue：" + exitValue);
+        if (exitValue == 0) log.info("Python 代码结果：" + result);
+        else {
+            BufferedReader errorReader = getConsoleReader(proc.getErrorStream());
+            while ((line = errorReader.readLine()) != null) {
+                log.error(line);
+            }
+            throw new Exception("脚本运行出错详见日志");
+        }
+        in.close();
+        return result.toString();
+    }
     private String createNewPy(String path) throws IOException {
         File file = new File(path);
         if (file.isFile()) {
