@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -27,8 +28,9 @@ public class ModelServiceImpl extends ServiceImpl<ModelMapper, Model> implements
     private modelResult modelResult;
 
     @Override
-    public List<modelResult> trainModel(trainAl trainAl) {
-        List<modelResult> resultList = new ArrayList<>();
+    public Map<String, List<modelResult>> trainModel(trainAl trainAl) {
+
+        Map<String, List<modelResult>> resultMap = new HashMap<>();
         // 调用训练模型算法
         Integer uid = 516005890;
         String modelName = "test";
@@ -93,14 +95,17 @@ public class ModelServiceImpl extends ServiceImpl<ModelMapper, Model> implements
                 modelResult.setEvaluate(evaluate);
                 modelResult.setPicture(picturePath);
                 modelResult.setPkl(pklPath);
+                List<modelResult> resultList = new ArrayList<>();
                 resultList.add(modelResult);
+                resultMap.put(algorithmName, resultList);
+                System.out.println(resultMap);
             } catch (Exception e) {
                 e.printStackTrace();
                 // 处理异常
             }
         }
-        System.out.println(resultList);
-        return resultList;
+
+        return resultMap;
     }
 }
 

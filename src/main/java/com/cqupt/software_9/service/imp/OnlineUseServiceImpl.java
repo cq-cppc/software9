@@ -37,7 +37,8 @@ public class OnlineUseServiceImpl extends OnlineUseServiceAdapter {
         System.out.println(args);
         RuntimeTaskRequest runtimeTaskRequest=new RuntimeTaskRequest();
 //        runtimeTaskRequest.setPyPath("F:/code/Online training/Projection-test.py");
-        runtimeTaskRequest.setPyPath("/home/data/WorkSpace/software9/Arithmetic/Online/Projection-test.py");
+//        runtimeTaskRequest.setPyPath("/home/data/WorkSpace/software9/Arithmetic/Online/Projection-test.py");
+        runtimeTaskRequest.setPyPath("E:\\soft\\software9-3\\software9\\src\\main\\resources\\Algorithm\\python\\reuse.py");
 
         runtimeTaskRequest.setArgs(args);
         RuntimeTaskResponse taskResponse=runtimeTaskService.submitTask(runtimeTaskRequest);

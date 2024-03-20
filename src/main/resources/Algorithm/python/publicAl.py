@@ -62,8 +62,10 @@ def load_data(tableName,output_file):
 
 # 构建模型
 def build_model(algorithmName, algorithmAttributes):
-    if algorithmName == 'RF':
+    if algorithmName == 'RF' :
         # 根据算法参数初始化随机森林模型
+        model = RandomForestClassifier(**algorithmAttributes)
+    elif algorithmName == 'DT':
         model = RandomForestClassifier(**algorithmAttributes)
     elif algorithmName == 'SVM':
         # 根据算法参数初始化支持向量机模型
@@ -89,13 +91,21 @@ def evaluate_model(model, X_test, y_test):
     # 计算AUC
 
     # 计算准确率
-    accuracy = accuracy_score(y_test, y_pred)
+    # accuracy = accuracy_score(y_test, y_pred)
+    # # 计算精确率
+    # precision = precision_score(y_test, y_pred)
+    # # 计算召回率
+    # recall = recall_score(y_test, y_pred)
+    # # 计算F1分数
+    # f1 = f1_score(y_test, y_pred)
+    accuracy = round(accuracy_score(y_test, y_pred), 5)
     # 计算精确率
-    precision = precision_score(y_test, y_pred)
+    precision = round(precision_score(y_test, y_pred), 5)
     # 计算召回率
-    recall = recall_score(y_test, y_pred)
+    recall = round(recall_score(y_test, y_pred), 5)
     # 计算F1分数
-    f1 = f1_score(y_test, y_pred)
+    f1 = round(f1_score(y_test, y_pred), 5)
+
 
     return accuracy, precision, recall, f1
 
@@ -129,7 +139,7 @@ def publicAl(tableName, target, fea, algorithmName, algorithmAttributes):
 
     # 创建文件夹（如果不存在）
     folder_name = datetime.now().strftime('%Y%m%d%H%M%S')+ '_' + algorithmName
-    output_dir = 'E:\\soft\\software9-3\\software9\\src\\main\\resources\\Algorithm\\picture\\{}'.format(folder_name)
+    output_dir = 'E:\\soft\\Software9-v2.0-1220\\src\\assets{}'.format(folder_name)
     os.makedirs(output_dir, exist_ok=True)
     os.chdir(output_dir)
 
@@ -226,7 +236,7 @@ if __name__ == "__main__":
     "SEER Combined Mets at DX-brain (2010+)","SEER Combined Mets at DX-liver (2010+)","SEER Combined Mets at DX-lung (2010+)",
     "SEER cause-specific death classification","SEER other cause of death classification","Survival months flag",
     "Vital status recode (study cutoff used)"]
-    algorithmName = "RF"
+    # algorithmName = "RF"
     algorithmAttributes = {"bootstrap": True,
                            "criterion": "gini",
                            "max_depth": None,
@@ -243,7 +253,7 @@ if __name__ == "__main__":
     # tableName = args[0]
     # target = args[1]
     # fea = sys.argv[3].split(',')  # 将逗号分隔的字符串转换为列表
-    # algorithmName = sys.argv[4]
+    algorithmName = sys.argv[4]
     # algorithmAttributes_str = args[4:]  # 获取算法属性字符串列表
     #
     # # 解析算法属性为字典

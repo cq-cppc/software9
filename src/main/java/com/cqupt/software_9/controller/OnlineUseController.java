@@ -49,8 +49,8 @@ public class OnlineUseController {
 //            res.setE(e);
 //            return res;
 //        }
-            OnlineServiceResponse res = onlineUseService.onlineUse(request);
-            return res;
+        OnlineServiceResponse res = onlineUseService.onlineUse(request);
+        return res;
     }
 
 

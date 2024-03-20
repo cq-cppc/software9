@@ -128,7 +128,7 @@ public class ModelController {
      * 接收前端传过来的表名，所选目标列和特征列和所选算法及算法超参
      */
     @PostMapping("/trainAl")
-    public List<modelResult> trainAl(@RequestBody trainAl trainAl){
+    public Map<String, List<modelResult>> trainAl(@RequestBody trainAl trainAl){
 
         return modelService.trainModel(trainAl);
     }
