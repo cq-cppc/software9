@@ -23,6 +23,11 @@
     <select id="getAlgorithmByAlgorithmName" resultType="com.cqupt.software_9.entity.publicAl">
         SELECT * FROM algorithm
     </select>
+    <select id="getFeaByTableName" resultType="java.lang.String">
+        SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name = #{tableName};
+    </select>
 
 </mapper>
 

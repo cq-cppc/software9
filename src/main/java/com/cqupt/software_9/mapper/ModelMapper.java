@@ -16,4 +16,6 @@ public interface ModelMapper extends BaseMapper<Model> {
     String getUrlByalgorithmNameAndUid(Integer uid, String algorithmName);
 
     List<publicAl> getAlgorithmByAlgorithmName();
+
+    List<String> getFeaByTableName(String tableName);
 }

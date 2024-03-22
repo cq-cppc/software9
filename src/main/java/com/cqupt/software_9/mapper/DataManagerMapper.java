@@ -24,4 +24,6 @@ public interface DataManagerMapper extends BaseMapper<DataManager> {
     DataManager getdetailBytableName(String tablename);
 
     List<String> getDiseaseName();
+
+    List<String> getTableByDisease(String diseasename);
 }

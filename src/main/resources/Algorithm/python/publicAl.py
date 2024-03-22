@@ -115,9 +115,9 @@ def evaluate_model(model, X_test, y_test):
 
 def publicAl(tableName, target, fea, algorithmName, algorithmAttributes):
     # 加载数据
-    output_file = "output.csv"
+    output_file = 'output.csv'
     fetch_data_and_columns = load_data(tableName, output_file)
-    data = pd.read_csv('E:\\soft\\software9-3\\software9\\src\\main\\resources\\Algorithm\\python\\GastricCancer.csv')
+    data = pd.read_csv(output_file)
     # 划分特征和标签
     X = data[fea]
     y = data[target]
@@ -139,7 +139,7 @@ def publicAl(tableName, target, fea, algorithmName, algorithmAttributes):
 
     # 创建文件夹（如果不存在）
     folder_name = datetime.now().strftime('%Y%m%d%H%M%S')+ '_' + algorithmName
-    output_dir = 'E:\\soft\\Software9-v2.0-1220\\src\\assets{}'.format(folder_name)
+    output_dir = 'E:\\soft\\Software9-v2.0-1220\\src\\assets\\{}'.format(folder_name)
     os.makedirs(output_dir, exist_ok=True)
     os.chdir(output_dir)
 
@@ -225,51 +225,52 @@ def parse_algorithm_attributes(attr_list):
 
 if __name__ == "__main__":
 
-    tableName = "heart1test"
-    target = "label"
-    # fea = ["age", "sex", "cp", "trestbps", "chol", "fbs", "restecg", "thalach", "exang", "oldpeak", "slope", "ca",
-    #        "thal"]
-    fea = ["Marital status at diagnosis","Sex","Race recode (White, Black, Other)","Race recode (W, B, AI, API)",
-    "Diagnostic Confirmation","Derived AJCC M, 6th ed (2004-2015)","RX Summ--Scope Reg LN Sur (2003+)",
-    "RX Summ--Surg Oth Reg/Dis (2003+)","RX Summ--Surg/Rad Seq","Reason no cancer-directed surgery",
-    "Radiation recode","Chemotherapy recode (yes, no/unk)","RX Summ--Systemic/Sur Seq","SEER Combined Mets at DX-bone (2010+)",
-    "SEER Combined Mets at DX-brain (2010+)","SEER Combined Mets at DX-liver (2010+)","SEER Combined Mets at DX-lung (2010+)",
-    "SEER cause-specific death classification","SEER other cause of death classification","Survival months flag",
-    "Vital status recode (study cutoff used)"]
-    # algorithmName = "RF"
-    algorithmAttributes = {"bootstrap": True,
-                           "criterion": "gini",
-                           "max_depth": None,
-                           "class_weight": None,
-                           "max_features": None,
-                           "n_estimators": 100,
-                           "random_state": None,
-                           "min_samples_leaf": 1,
-                           "min_samples_split": 2}
+    # tableName = "heart1test"
+    # target = "label"
+    # # fea = ["age", "sex", "cp", "trestbps", "chol", "fbs", "restecg", "thalach", "exang", "oldpeak", "slope", "ca",
+    # #        "thal"]
+    # fea = ["Marital status at diagnosis","Sex","Race recode (White, Black, Other)","Race recode (W, B, AI, API)",
+    # "Diagnostic Confirmation","Derived AJCC M, 6th ed (2004-2015)","RX Summ--Scope Reg LN Sur (2003+)",
+    # "RX Summ--Surg Oth Reg/Dis (2003+)","RX Summ--Surg/Rad Seq","Reason no cancer-directed surgery",
+    # "Radiation recode","Chemotherapy recode (yes, no/unk)","RX Summ--Systemic/Sur Seq","SEER Combined Mets at DX-bone (2010+)",
+    # "SEER Combined Mets at DX-brain (2010+)","SEER Combined Mets at DX-liver (2010+)","SEER Combined Mets at DX-lung (2010+)",
+    # "SEER cause-specific death classification","SEER other cause of death classification","Survival months flag",
+    # "Vital status recode (study cutoff used)"]
+    # # algorithmName = "RF"
+    # algorithmAttributes = {"bootstrap": True,
+    #                        "criterion": "gini",
+    #                        "max_depth": None,
+    #                        "class_weight": None,
+    #                        "max_features": None,
+    #                        "n_estimators": 100,
+    #                        "random_state": None,
+    #                        "min_samples_leaf": 1,
+    #                        "min_samples_split": 2}
     # 获取命令行参数
-    # args = sys.argv[1:]  # 第一个参数是脚本文件路径，因此从第二个参数开始读取
+    args = sys.argv[1:]  # 第一个参数是脚本文件路径，因此从第二个参数开始读取
     #
-    # # 解析参数
-    # tableName = args[0]
-    # target = args[1]
-    # fea = sys.argv[3].split(',')  # 将逗号分隔的字符串转换为列表
+    # 解析参数
+    tableName = args[0]
+    target = args[1]
+    fea = sys.argv[3].split(',')  # 将逗号分隔的字符串转换为列表
     algorithmName = sys.argv[4]
-    # algorithmAttributes_str = args[4:]  # 获取算法属性字符串列表
-    #
-    # # 解析算法属性为字典
-    # algorithmAttributes = {}
-    # for attr_str in algorithmAttributes_str:
-    #     key, value = attr_str.split('=')
-    #     if value.lower() == 'true':
-    #         algorithmAttributes[key] = True
-    #     elif value.lower() == 'false':
-    #         algorithmAttributes[key] = False
-    #     elif value.lower() == 'none':
-    #         algorithmAttributes[key] = None
-    #     elif value.isdigit():
-    #         algorithmAttributes[key] = int(value)
-    #     else:
-    #         algorithmAttributes[key] = value
+    algorithmAttributes_str = args[4:]  # 获取算法属性字符串列表
+
+    # 解析算法属性为字典
+    algorithmAttributes = {}
+    for attr_str in algorithmAttributes_str:
+        key, value = attr_str.split('=')
+        if value.lower() == 'true':
+            algorithmAttributes[key] = True
+        elif value.lower() == 'false':
+            algorithmAttributes[key] = False
+        elif value.lower() == 'none':
+            algorithmAttributes[key] = None
+        elif value.isdigit():
+            algorithmAttributes[key] = int(value)
+        else:
+            algorithmAttributes[key] = value
 
     results, output_dir,model_path= publicAl(tableName, target, fea, algorithmName, algorithmAttributes)
     print(results, output_dir,model_path)
+    # print(tableName, target, fea, algorithmName, algorithmAttributes)

@@ -47,12 +47,7 @@ public class ModelController {
         return modelService.saveOrUpdate(model);
     }
 
-    @GetMapping("/getInfoByTableName/{tableName}")
-    public R<List<Map<String,Object>>> getInfoByTableName(@PathVariable("tableName") String tableName){
-        tableName = tableName.replace("\"", "");
-        List<Map<String, Object>> res = dataTableManagerService.getInfoByTableName(tableName);
-        return new R<>(200, "成功", res);
-    }
+
 
     /**
      *
@@ -132,5 +127,32 @@ public class ModelController {
 
         return modelService.trainModel(trainAl);
     }
+
+
+    /**
+     * 数据选择模块中，通过病种查询对应的数据表
+     */
+    @GetMapping("/getTableByDisease/{diseasename}")
+    public  List<String> getTableByDisease(@PathVariable("diseasename")String diseasename){
+        return dataManagerMapper.getTableByDisease(diseasename);
+    }
+
+    /**
+     * 根据数据表明获取到列名作为特证名
+     */
+    @GetMapping("/getFeaByTableName/{tableName}")
+    public List<String> getFeaByTableName(@PathVariable("tableName")String tableName){
+        return modelMapper.getFeaByTableName(tableName);
+    }
+
+
+    @GetMapping("/getInfoByTableName/{tableName}")
+    public R<List<Map<String,Object>>> getInfoByTableName(@PathVariable("tableName") String tableName){
+        tableName = tableName.replace("\"", "");
+        List<Map<String, Object>> res = dataTableManagerService.getInfoByTableName(tableName);
+        return new R<>(200, "成功", res);
+    }
+
+
 
 }

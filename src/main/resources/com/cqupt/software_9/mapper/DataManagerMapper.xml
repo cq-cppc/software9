@@ -40,5 +40,9 @@
         select DISTINCT diseasename from data_manager
     </select>
 
+    <select id="getTableByDisease" resultType="java.lang.String">
+        select tablename from data_manager where diseasename = #{diseasename}
+    </select>
+
 
 </mapper>
