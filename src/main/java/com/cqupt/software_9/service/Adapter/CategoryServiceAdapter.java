@@ -24,6 +24,11 @@ public class CategoryServiceAdapter implements CategoryService {
     }
 
     @Override
+    public void addParentDisease(String diseaseName) {
+
+    }
+
+    @Override
     public boolean saveBatch(Collection<CategoryEntity> entityList, int batchSize) {
         return false;
     }

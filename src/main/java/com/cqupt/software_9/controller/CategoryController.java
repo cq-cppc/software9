@@ -53,4 +53,11 @@ public class CategoryController {
         return Result.success(200,"删除成功");
     }
 
+    @GetMapping("/addParentDisease")
+    public Result addParentDisease(@RequestParam("diseaseName") String diseaseName){
+        System.out.println("name:"+diseaseName);
+        categoryService.addParentDisease(diseaseName);
+        return Result.success("200",null);
+    }
+
 }

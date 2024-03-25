@@ -9,4 +9,6 @@ import java.util.List;
 public interface CategoryService extends IService<CategoryEntity> {
     List<CategoryEntity> getCategory();
     void removeNode(String id);
+
+    void addParentDisease(String diseaseName);
 }

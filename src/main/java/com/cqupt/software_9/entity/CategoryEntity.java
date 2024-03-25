@@ -29,4 +29,5 @@ public class CategoryEntity {
     @TableField(exist = false)
     private List<CategoryEntity> children;
 
+
 }

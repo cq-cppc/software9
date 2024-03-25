@@ -68,4 +68,10 @@ public class CategoryServiceImpl extends CategoryServiceAdapter {
         }).collect(Collectors.toList());
         return children;
     }
+
+    @Override
+    public void addParentDisease(String diseaseName) {
+        CategoryEntity categoryEntity = new CategoryEntity(null, 1, diseaseName, "0", 0, 0, "" + diseaseName, 0, 0, null);
+        categoryMapper.insert(categoryEntity);
+    }
 }
