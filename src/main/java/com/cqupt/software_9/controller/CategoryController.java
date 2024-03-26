@@ -9,6 +9,7 @@ import com.cqupt.software_9.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 // TODO 公共模块新增类
@@ -45,11 +46,25 @@ public class CategoryController {
         return Result.success(200,"新增目录成功");
     }
 
+//    // 删除一个目录
+//    @GetMapping("/category/remove")
+//    public Result removeCate(CategoryEntity categoryEntity){
+//        System.out.println("要删除的目录为："+JSON.toJSONString(categoryEntity));;
+//        categoryService.removeNode(categoryEntity.getId());
+//        return Result.success(200,"删除成功");
+//    }
+
     // 删除一个目录
+    @Transactional
     @GetMapping("/category/remove")
     public Result removeCate(CategoryEntity categoryEntity){
-        System.out.println("要删除的目录为："+JSON.toJSONString(categoryEntity));;
-        categoryService.removeNode(categoryEntity.getId());
+        System.out.println("要删除的目录为："+JSON.toJSONString(categoryEntity));
+        if(categoryEntity.getIsLeafs()==0){
+            categoryService.removeNode(categoryEntity.getId());
+        }
+        else {
+            categoryService.removeNode(categoryEntity.getId(),categoryEntity.getLabel());
+        }
         return Result.success(200,"删除成功");
     }
 

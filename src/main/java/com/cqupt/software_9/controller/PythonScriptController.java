@@ -1,22 +1,34 @@
 package com.cqupt.software_9.controller;
 
 
+import com.cqupt.software_9.common.Result;
+import com.cqupt.software_9.service.Request.RuntimeTaskRequest;
+import com.cqupt.software_9.service.Response.RuntimeTaskResponse;
+import com.cqupt.software_9.service.RuntimeTaskService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.List;
 
 
 @RestController
 @RequestMapping("/scripts")
 public class PythonScriptController {
+    @Value("src/main/resources/Scripts/get_statics.py")
+    private String scriptPyPath;
 
+    @Resource
+    private RuntimeTaskService runtimeTaskService;
 
     @GetMapping("/get_fill_rate")
-    public String pyfileUpload(@RequestParam String tablename) {
+    public static String pyfileUpload(@RequestParam String tablename) {
         StringBuilder builder = new StringBuilder();
         Process process = null;
         try {
@@ -48,6 +60,17 @@ public class PythonScriptController {
             }
         }
         return builder.toString().trim();  // 注意：.trim()移除了末尾的系统换行符
+    }
+
+    @GetMapping("/get_stastic")
+    public Result getStastic(@RequestParam String tablename) throws Exception {
+        RuntimeTaskRequest runtimeTaskRequest=new RuntimeTaskRequest();
+        List<String> args=new LinkedList<>();
+        args.add("--tablename="+tablename);
+        runtimeTaskRequest.setPyPath(scriptPyPath);
+        runtimeTaskRequest.setArgs(args);
+        RuntimeTaskResponse taskResponse=runtimeTaskService.submitStastic(runtimeTaskRequest);
+        return Result.success(taskResponse.getRes());
     }
 
 }

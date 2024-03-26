@@ -10,6 +10,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -57,6 +58,17 @@ public class RuntimeTaskServiceImpl extends RuntimeServiceTaskAdapter {
         List<String> res = JSONObject.parseArray(pythonRun.run1(request.getPyPath(), request.getRequest()), String.class);
         taskResponse.setRes(res);
         System.out.println("res" + res);
+        return taskResponse;
+    }
+
+    @Override
+    public RuntimeTaskResponse submitStastic(RuntimeTaskRequest request) throws Exception {
+        RuntimeTaskResponse taskResponse = new RuntimeTaskResponse();
+        BeanUtils.copyProperties(request, taskResponse);
+        String resultStr = pythonRun.runScript(request.getPyPath(), request.getArgs());
+        List<String> res = new ArrayList<>();
+        res.add(resultStr);
+        taskResponse.setRes(res);
         return taskResponse;
     }
 }

@@ -74,6 +74,43 @@ public class PythonRun {
         return result.toString();
     }
 
+    public String runScript(String path, List<String> args) throws Exception {
+        List<String> inputArgs = new LinkedList<>(Arrays.asList(environment, path));
+        inputArgs.addAll(args);
+        inputArgs.removeIf(Objects::isNull);
+
+        StringBuilder builder = new StringBuilder();
+        Process process = null;
+        try {
+            process = Runtime.getRuntime().exec(inputArgs.toArray(new String[0]));
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream(), "UTF-8"));
+
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                builder.append(line);
+                //builder.append(System.lineSeparator());
+            }
+
+            int exitCode = process.waitFor();
+            if (exitCode != 0) {
+                // 如果Python脚本没有成功执行，你可能想要捕捉错误输出
+                reader = new BufferedReader(new InputStreamReader(process.getErrorStream(), "UTF-8"));
+                while ((line = reader.readLine()) != null) {
+                    System.err.println(line);
+                }
+                throw new RuntimeException("Execution of the Python script failed!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // 打印错误堆栈信息
+        } finally {
+            if (process != null) {
+                process.destroy();
+            }
+        }
+        return builder.toString().trim();  // 注意：.trim()移除了末尾的系统换行符
+    }
+
     public String publicAl(String path, String tableName, String target, String[] fea,
                            String algorithmName, Map<String, String> algorithmAttributes) throws Exception {
 //        path = createNewPy(path);

@@ -19,6 +19,11 @@ public class CategoryServiceAdapter implements CategoryService {
     }
 
     @Override
+    public void removeNode(String id, String label) {
+
+    }
+
+    @Override
     public void removeNode(String id) {
 
     }

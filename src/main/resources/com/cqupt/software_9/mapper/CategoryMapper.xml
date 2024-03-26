@@ -8,4 +8,8 @@
     <update id="removeNode">
         update category set is_delete=1 where id = CAST(#{id} AS VARCHAR);;
     </update>
+
+    <update id="removeTable">
+        drop table "${label}";
+    </update>
 </mapper>

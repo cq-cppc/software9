@@ -74,4 +74,10 @@ public class CategoryServiceImpl extends CategoryServiceAdapter {
         CategoryEntity categoryEntity = new CategoryEntity(null, 1, diseaseName, "0", 0, 0, "" + diseaseName, 0, 0, null);
         categoryMapper.insert(categoryEntity);
     }
+    @Override
+    public void removeNode(String id, String label) {
+        categoryMapper.removeNode(id);
+        categoryMapper.removeTable(label);
+    }
+
 }

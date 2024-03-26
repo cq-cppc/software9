@@ -12,6 +12,8 @@ public interface RuntimeTaskService {
 
     void killTask();
 
+    RuntimeTaskResponse submitStastic(RuntimeTaskRequest request) throws Exception;
+
     RuntimeTaskResponse queryById(Integer id);
 
     List<RuntimeTaskResponse> queryByBizId(Integer bizId);

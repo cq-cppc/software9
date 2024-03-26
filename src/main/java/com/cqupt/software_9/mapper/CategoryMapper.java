@@ -12,4 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CategoryMapper extends BaseMapper<CategoryEntity> {
     void removeNode(@Param("id") String id);
+
+    void removeTable(@Param("label") String label);
+
 }

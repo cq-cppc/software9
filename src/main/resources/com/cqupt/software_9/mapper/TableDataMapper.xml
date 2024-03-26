@@ -45,14 +45,14 @@
     <update id="createTable">
         create table ${tableName} (
         <foreach collection="headers" item="columnName" separator=",">
-            ${columnName} VARCHAR(255)
+            "${columnName}" VARCHAR(255)
         </foreach>
         );
 
     </update>
 <!--    创建表头-->
     <update id="createTableByField">
-        CREATE TABLE ${tableName}
+        CREATE TABLE"${tableName}"
         (
                 dataid character varying(255) COLLATE pg_catalog."default",
                 visitno character varying(255) COLLATE pg_catalog."default",
@@ -212,13 +212,13 @@
 <!--        select * from ${tableName};-->
 <!--    </select>-->
     <select id="getFilterData" resultType="java.util.LinkedHashMap">
-        select * from ${tableName} where
+        select * from "${tableName}" where
         <foreach collection="conditions" item="featureVo">
             ${featureVo.optString} ${featureVo.featureName} ${featureVo.computeOpt} ${featureVo.value}
         </foreach>
     </select>
         <select id="getTableData" resultType="java.util.LinkedHashMap">
-                select * from ${tableName} limit 13;
+                select * from "${tableName}" limit 13;
         </select>
         <select id="getColsTableData" resultType="java.util.LinkedHashMap">
                 select
@@ -228,7 +228,7 @@
                 from ${tableName};
         </select>
         <select id="getAllTableData" resultType="java.util.LinkedHashMap">
-                select * from ${tableName};
+                select * from "${tableName}";
         </select>
 
 </mapper>

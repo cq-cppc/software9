@@ -8,6 +8,8 @@ import java.util.List;
 // TODO 公共模块新增类
 public interface CategoryService extends IService<CategoryEntity> {
     List<CategoryEntity> getCategory();
+    void removeNode(String id, String label);
+
     void removeNode(String id);
 
     void addParentDisease(String diseaseName);

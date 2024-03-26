@@ -22,6 +22,11 @@ public class RuntimeServiceTaskAdapter implements RuntimeTaskService {
     }
 
     @Override
+    public RuntimeTaskResponse submitStastic(RuntimeTaskRequest request) throws Exception {
+        return null;
+    }
+
+    @Override
     public RuntimeTaskResponse queryById(Integer id) {
         return null;
     }
