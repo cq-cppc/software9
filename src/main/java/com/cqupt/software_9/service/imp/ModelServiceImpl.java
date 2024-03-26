@@ -10,6 +10,7 @@ import com.cqupt.software_9.tool.PythonRun;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +27,9 @@ public class ModelServiceImpl extends ServiceImpl<ModelMapper, Model> implements
 
     @Autowired
     private modelResult modelResult;
+
+    @Resource
+    private ModelMapper modelMapper;
 
     @Override
     public Map<String, List<modelResult>> trainModel(trainAl trainAl) {
@@ -106,6 +110,11 @@ public class ModelServiceImpl extends ServiceImpl<ModelMapper, Model> implements
         }
 
         return resultMap;
+    }
+
+    @Override
+    public List<Model> upall() {
+        return modelMapper.getallmodel();
     }
 }
 

@@ -16,6 +16,11 @@
         SELECT * FROM model WHERE uid = #{uid} and modelname = #{modelname}
     </select>
 
+    <delete id="removeModel" parameterType="map">
+    DELETE FROM model
+    WHERE uid = #{uid} AND modelname = #{modelname}
+  </delete>
+
     <select id="getUrlByalgorithmNameAndUid" resultType="java.lang.String">
         SELECT modeurl FROM model WHERE uid = #{uid} and modelname = #{modelname}
     </select>

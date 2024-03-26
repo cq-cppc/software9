@@ -3,6 +3,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cqupt.software_9.entity.Model;
 import com.cqupt.software_9.entity.publicAl;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ public interface ModelMapper extends BaseMapper<Model> {
 
     List<Model> getModelFeatureByUidAndModelName(Integer uid, String modelname);
 
+    void removeModel(Integer uid, String modelname);
 
     String getUrlByalgorithmNameAndUid(Integer uid, String algorithmName);
 

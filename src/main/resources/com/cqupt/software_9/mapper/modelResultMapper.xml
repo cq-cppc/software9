@@ -6,7 +6,14 @@
 
 <mapper namespace="com.cqupt.software_9.mapper.modelResultMapper">
 
+    <select id="getModelResultByUidAndModelName" resultType="com.cqupt.software_9.entity.modelResult">
+        SELECT * FROM modelresult WHERE uid = #{uid} and modelname = #{modelname}
+    </select>
 
+    <delete id="removeModelResult" parameterType="map">
+    DELETE FROM modelresult
+    WHERE uid = #{uid} AND modelname = #{modelname}
+  </delete>
 
 
 
